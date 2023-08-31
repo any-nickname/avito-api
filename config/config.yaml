@@ -1,0 +1,16 @@
+app:
+  name: segmentation-service
+  version: 1.0.0
+log:
+  level: debug
+  logs_path: logs/logs.txt
+http:
+  bind_ip: localhost
+  port: 8080
+postgresql:
+  host: localhost
+  port: 5433
+  username: postgres
+  password: admin
+  database: segmentation-service
+  max_pool_size: 20
