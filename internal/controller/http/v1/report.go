@@ -16,7 +16,7 @@ func newReportRoutes(g *echo.Group, reportService service.Report) {
 		reportService: reportService,
 	}
 
-	g.POST("", r.makeReport)
+	g.GET("", r.makeReport)
 }
 
 type MakeReportResponse struct {
@@ -40,7 +40,7 @@ type MakeReportResponse struct {
 // @Success 200 {object} MakeReportResponse "Структура, содержащая дату формирования отчёта и отчёт в виде csv-строки"
 // @Failure 400 {object} error.ErrReportValidationError "Ошибка валидации данных запроса"
 // @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
-// @Router /api/v1/reports [post]
+// @Router /api/v1/reports [get]
 func (r *reportRoutes) makeReport(c echo.Context) error {
 	result, err := r.reportService.MakeReport(c.Request().Context())
 	if err != nil {

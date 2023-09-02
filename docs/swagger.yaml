@@ -322,7 +322,7 @@ info:
   version: "1.0"
 paths:
   /api/v1/reports:
-    post:
+    get:
       description: |-
         Возвращает csv-строку, представляющую собой csv-отчёт,
         содержащий столбцы `user_id`, `segment_name`, `start_date`,
