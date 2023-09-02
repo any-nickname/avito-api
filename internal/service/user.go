@@ -2,12 +2,10 @@ package service
 
 import (
 	"avito-rest-api/internal/entity"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/internal/repository"
-	customError "avito-rest-api/package/error"
 	"context"
 	"fmt"
-	"github.com/gocarina/gocsv"
-	"sort"
 	"strings"
 	"time"
 )
@@ -331,49 +329,4 @@ func (us *UserService) DeleteUserFromSegments(ctx context.Context, id int, segme
 	}
 
 	return us.userRepository.DeleteUserFromSegments(ctx, id, segmentsToDelete)
-}
-
-func (us *UserService) MakeReport(ctx context.Context) (string, error) {
-	allUsers, err := us.GetAllUsersWithSegments(ctx)
-	if err != nil {
-		return "", err
-	}
-
-	type reportRow struct {
-		UserID      int    `csv:"user_id"`
-		SegmentName string `csv:"segment_name"`
-		StartDate   string `csv:"start_date"`
-		EndDate     string `csv:"end_date"`
-	}
-
-	var report []reportRow
-	for _, user := range allUsers {
-		for _, segment := range user.Segments {
-			report = append(report, reportRow{
-				UserID:      user.User.ID,
-				SegmentName: segment.Name,
-				StartDate:   segment.StartDate,
-				EndDate:     segment.EndDate,
-			})
-		}
-	}
-
-	// Сортируем строки отчёта по дате добавления пользователя в сегмент
-	sort.Slice(report, func(i, j int) bool {
-		x, _ := time.Parse("15:04:05 02.01.2006", report[j].StartDate)
-		y, _ := time.Parse("15:04:05 02.01.2006", report[j].StartDate)
-		return y.After(x)
-	})
-
-	csv, err := gocsv.MarshalString(report)
-	if err != nil {
-		return "", customError.ErrInternalServerError{ErrBase: customError.ErrBase{
-			OriginError:     err,
-			OriginErrorText: err.Error(),
-			Comment:         "Failed to convert report rows to csv",
-			Location:        "UserService.MakeReport - gocsv.MarshalString",
-		}}
-	}
-
-	return csv, nil
 }

@@ -70,3 +70,10 @@ type ErrSegmentDeleted struct {
 type ErrSegmentAlreadyExists struct {
 	ErrBase
 }
+
+// ErrReportValidationError используется,
+// когда запрос на создание отчёта содержит
+// некорректные данные.
+type ErrReportValidationError struct {
+	ErrBase
+}

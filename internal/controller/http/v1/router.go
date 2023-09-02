@@ -2,8 +2,8 @@ package v1
 
 import (
 	_ "avito-rest-api/docs"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/internal/service"
-	customError "avito-rest-api/package/error"
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
 	"net/http"
@@ -17,6 +17,7 @@ func NewRouter(handler *echo.Echo, services *service.Services) {
 
 	newUserRoutes(v1.Group("/users"), services.User)
 	newSegmentRoutes(v1.Group("/segments"), services.Segment)
+	newReportRoutes(v1.Group("/reports"), services.Report)
 }
 
 func errorHandler(c echo.Context, err error) error {
@@ -44,6 +45,10 @@ func errorHandler(c echo.Context, err error) error {
 		return c.JSON(http.StatusNotFound, t)
 	case customError.ErrSegmentAlreadyExists:
 		t.Title = "ErrSegmentAlreadyExists"
+		return c.JSON(http.StatusBadRequest, t)
+
+	case customError.ErrReportValidationError:
+		t.Title = "ErrReportValidationError"
 		return c.JSON(http.StatusBadRequest, t)
 
 	// Внутренняя ошибка сервера

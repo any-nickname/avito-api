@@ -2,8 +2,8 @@ package service
 
 import (
 	"avito-rest-api/internal/entity"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/internal/repository"
-	customError "avito-rest-api/package/error"
 	"fmt"
 	"golang.org/x/net/context"
 )

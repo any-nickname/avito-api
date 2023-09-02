@@ -25,14 +25,20 @@ type Segment interface {
 	AddUsersToSegmentByRandomPercent(ctx context.Context, name string, percent int) error
 }
 
+type Report interface {
+	MakeReport(ctx context.Context) (entity.Report, error)
+}
+
 type Repositories struct {
 	User
 	Segment
+	Report
 }
 
 func NewRepositories(pg *postgres.PostgreDB) *Repositories {
 	return &Repositories{
 		User:    pgdb.NewUserRepository(pg),
 		Segment: pgdb.NewSegmentRepository(pg),
+		Report:  pgdb.NewReportRepository(pg),
 	}
 }

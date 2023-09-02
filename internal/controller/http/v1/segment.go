@@ -2,8 +2,8 @@ package v1
 
 import (
 	"avito-rest-api/internal/entity"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/internal/service"
-	customError "avito-rest-api/package/error"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"net/http"

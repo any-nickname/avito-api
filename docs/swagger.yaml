@@ -80,6 +80,72 @@ definitions:
       user:
         $ref: '#/definitions/avito-rest-api_internal_entity.User'
     type: object
+  avito-rest-api_internal_error.ErrInternalServerError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_internal_error.ErrReportValidationError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_internal_error.ErrSegmentNotFound:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_internal_error.ErrSegmentValidationError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_internal_error.ErrUserNotFound:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_internal_error.ErrUserValidationError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
   avito-rest-api_internal_service.SegmentCreateInput:
     properties:
       name:
@@ -119,61 +185,6 @@ definitions:
     - lastname
     - name
     - sex
-    type: object
-  avito-rest-api_package_error.ErrInternalServerError:
-    properties:
-      comment:
-        type: string
-      location:
-        type: string
-      originErrorText:
-        type: string
-      title:
-        type: string
-    type: object
-  avito-rest-api_package_error.ErrSegmentNotFound:
-    properties:
-      comment:
-        type: string
-      location:
-        type: string
-      originErrorText:
-        type: string
-      title:
-        type: string
-    type: object
-  avito-rest-api_package_error.ErrSegmentValidationError:
-    properties:
-      comment:
-        type: string
-      location:
-        type: string
-      originErrorText:
-        type: string
-      title:
-        type: string
-    type: object
-  avito-rest-api_package_error.ErrUserNotFound:
-    properties:
-      comment:
-        type: string
-      location:
-        type: string
-      originErrorText:
-        type: string
-      title:
-        type: string
-    type: object
-  avito-rest-api_package_error.ErrUserValidationError:
-    properties:
-      comment:
-        type: string
-      location:
-        type: string
-      originErrorText:
-        type: string
-      title:
-        type: string
     type: object
   internal_controller_http_v1.AddUserToSegmentsInput:
     properties:
@@ -287,6 +298,11 @@ definitions:
   internal_controller_http_v1.MakeReportResponse:
     properties:
       report:
+        description: Отчёт в виде csv-строки с разделителями "," и символом перехода
+          на новую строку "\n"
+        type: string
+      report_date:
+        description: Дата формирования отчёта
         type: string
     type: object
   internal_controller_http_v1.UserCreateResponse:
@@ -305,6 +321,35 @@ info:
   title: Сервис по работе с сегментами
   version: "1.0"
 paths:
+  /api/v1/reports:
+    post:
+      description: |-
+        Возвращает csv-строку, представляющую собой csv-отчёт,
+        содержащий столбцы `user_id`, `segment_name`, `start_date`,
+        `end_date`, обозначающие идентификатор пользователя,
+        наименование сегмента, дату добавления пользователя в сегмент и
+        дату выхода пользователя из сегмента соответственно. Строки отчёта
+        отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
+
+        В результате выполнения запроса формируется файл и устанавливается заголовок ответа
+        `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
+      responses:
+        "200":
+          description: Структура, содержащая дату формирования отчёта и отчёт в виде
+            csv-строки
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.MakeReportResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrReportValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
+      summary: Получить отчёт в формате csv
+      tags:
+      - reports
   /api/v1/segments:
     get:
       description: Возвращает список всех сегментов
@@ -318,11 +363,11 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Получить список всех сегментов
       tags:
       - segments
@@ -347,11 +392,11 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Создать сегмент
       tags:
       - segments
@@ -380,15 +425,15 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError'
         "404":
           description: Сегмент с указанным именем не был найден
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentNotFound'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrSegmentNotFound'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Удалить сегмент с указанным именем
       tags:
       - segments
@@ -410,15 +455,15 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError'
         "404":
           description: Сегмент с указанным именем не был найден
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentNotFound'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrSegmentNotFound'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Получить сегмент с указанным именем
       tags:
       - segments
@@ -435,11 +480,11 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Получить список всех пользователей
       tags:
       - users
@@ -464,11 +509,11 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Создать пользователя
       tags:
       - users
@@ -491,15 +536,15 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "404":
           description: Пользователь с указанным ID не был найден
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserNotFound'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Получить пользователя по ID
       tags:
       - users
@@ -523,15 +568,15 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "404":
           description: Пользователь с указанным ID не был найден
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserNotFound'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Получить пользователя с его сегментами по ID
       tags:
       - users
@@ -557,16 +602,16 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "404":
           description: Пользователь с указанным ID не был найден или некоторые из
             указанных сегментов не существуют
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserNotFound'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Добавить пользователя в сегменты
       tags:
       - users
@@ -590,45 +635,17 @@ paths:
           description: Ошибка валидации данных запроса, может возникать, если пользователь
             не входит в указанные сегменты
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "404":
           description: Пользователь с указанным ID не был найден или некоторые из
             указанных сегментов не существуют
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserNotFound'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Удалить пользователя из сегментов
-      tags:
-      - users
-  /api/v1/users/report:
-    get:
-      description: |-
-        Возвращает csv-строку, представляющую собой csv-отчёт,
-        содержащий столбцы `user_id`, `segment_name`, `start_date`,
-        `end_date`, обозначающие идентификатор пользователя,
-        наименование сегмента, дату добавления пользователя в сегмент и
-        дату выхода пользователя из сегмента соответственно. Строки отчёта
-        отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
-
-        В результате выполнения запроса формируется файл и устанавливается заголовок ответа
-        `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
-      responses:
-        "200":
-          description: csv-строка, представляющая собой отчёт
-          schema:
-            $ref: '#/definitions/internal_controller_http_v1.MakeReportResponse'
-        "400":
-          description: Ошибка валидации данных запроса
-          schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
-        "500":
-          description: Внутренняя ошибка сервера
-          schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
-      summary: Получить отчёт в формате csv
       tags:
       - users
   /api/v1/users/withSegments:
@@ -645,11 +662,11 @@ paths:
         "400":
           description: Ошибка валидации данных запроса
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrUserValidationError'
         "500":
           description: Внутренняя ошибка сервера
           schema:
-            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+            $ref: '#/definitions/avito-rest-api_internal_error.ErrInternalServerError'
       summary: Получить список всех пользователей, включая их сегменты
       tags:
       - users

@@ -15,7 +15,6 @@ type User interface {
 	GetUserWithSegmentsByUserID(ctx context.Context, id int) (entity.UserWithSegments, error)
 	AddUserToSegments(ctx context.Context, id int, segments []entity.UserSegmentInformation) error
 	DeleteUserFromSegments(ctx context.Context, id int, segments []string) error
-	MakeReport(ctx context.Context) (string, error)
 }
 
 type Segment interface {
@@ -25,9 +24,14 @@ type Segment interface {
 	DeleteSegment(ctx context.Context, name string) error
 }
 
+type Report interface {
+	MakeReport(ctx context.Context) (entity.ReportCSV, error)
+}
+
 type Services struct {
 	User    User
 	Segment Segment
+	Report  Report
 }
 
 type ServicesDependencies struct {
@@ -38,5 +42,6 @@ func NewService(dependencies ServicesDependencies) *Services {
 	return &Services{
 		User:    NewUserService(dependencies.Repositories.User, dependencies.Repositories.Segment),
 		Segment: NewSegmentService(dependencies.Repositories.Segment),
+		Report:  NewReportService(dependencies.Repositories.Report),
 	}
 }

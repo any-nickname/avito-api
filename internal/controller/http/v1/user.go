@@ -2,8 +2,8 @@ package v1
 
 import (
 	"avito-rest-api/internal/entity"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/internal/service"
-	customError "avito-rest-api/package/error"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -26,7 +26,6 @@ func newUserRoutes(g *echo.Group, userService service.User) {
 	g.GET("/:id/withSegments", r.getByIDWithSegments)
 	g.POST("/addUserToSegments", r.addUserToSegments)
 	g.POST("/deleteUserFromSegments", r.deleteUserFromSegments)
-	g.GET("/report", r.makeReport)
 }
 
 type UserCreateResponse struct {
@@ -283,32 +282,4 @@ func (r *userRoutes) deleteUserFromSegments(c echo.Context) error {
 	return c.JSON(http.StatusOK, DeleteUserFromSegmentsResponse{
 		Message: fmt.Sprintf("user %d was successfully removed from segments", id),
 	})
-}
-
-type MakeReportResponse struct {
-	Report string `json:"report"`
-}
-
-// @Summary Получить отчёт в формате csv
-// @Description Возвращает csv-строку, представляющую собой csv-отчёт,
-// @Description содержащий столбцы `user_id`, `segment_name`, `start_date`,
-// @Description `end_date`, обозначающие идентификатор пользователя,
-// @Description наименование сегмента, дату добавления пользователя в сегмент и
-// @Description дату выхода пользователя из сегмента соответственно. Строки отчёта
-// @Description отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
-// @Description
-// @Description В результате выполнения запроса формируется файл и устанавливается заголовок ответа
-// @Description `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
-// @Tags users
-// @Success 200 {object} MakeReportResponse "csv-строка, представляющая собой отчёт"
-// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
-// @Router /api/v1/users/report [get]
-func (r *userRoutes) makeReport(c echo.Context) error {
-	marshalledCSV, err := r.userService.MakeReport(c.Request().Context())
-	if err != nil {
-		return errorHandler(c, err)
-	}
-	c.Response().Header().Add("Content-Disposition", "`attachment; filename=\"report.csv\"`")
-	return c.JSON(http.StatusOK, MakeReportResponse{marshalledCSV})
 }

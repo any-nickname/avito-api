@@ -18,6 +18,35 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/reports": {
+            "post": {
+                "description": "Возвращает csv-строку, представляющую собой csv-отчёт,\nсодержащий столбцы ` + "`" + `user_id` + "`" + `, ` + "`" + `segment_name` + "`" + `, ` + "`" + `start_date` + "`" + `,\n` + "`" + `end_date` + "`" + `, обозначающие идентификатор пользователя,\nнаименование сегмента, дату добавления пользователя в сегмент и\nдату выхода пользователя из сегмента соответственно. Строки отчёта\nотсортированы в порядке возрастания по дате добавления пользователя в сегмент.\n\nВ результате выполнения запроса формируется файл и устанавливается заголовок ответа\n` + "`" + `Content-Disposition` + "`" + `, поэтому результат выполнения запроса необходимо скачать.",
+                "tags": [
+                    "reports"
+                ],
+                "summary": "Получить отчёт в формате csv",
+                "responses": {
+                    "200": {
+                        "description": "Структура, содержащая дату формирования отчёта и отчёт в виде csv-строки",
+                        "schema": {
+                            "$ref": "#/definitions/internal_controller_http_v1.MakeReportResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка валидации данных запроса",
+                        "schema": {
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrReportValidationError"
+                        }
+                    },
+                    "500": {
+                        "description": "Внутренняя ошибка сервера",
+                        "schema": {
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/segments": {
             "get": {
                 "description": "Возвращает список всех сегментов",
@@ -38,13 +67,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrSegmentValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -82,13 +111,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrSegmentValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -123,19 +152,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrSegmentValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError"
                         }
                     },
                     "404": {
                         "description": "Сегмент с указанным именем не был найден",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrSegmentNotFound"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrSegmentNotFound"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -171,19 +200,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrSegmentValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrSegmentValidationError"
                         }
                     },
                     "404": {
                         "description": "Сегмент с указанным именем не был найден",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrSegmentNotFound"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrSegmentNotFound"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -209,13 +238,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -253,13 +282,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -293,19 +322,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "404": {
                         "description": "Пользователь с указанным ID не был найден или некоторые из указанных сегментов не существуют",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserNotFound"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserNotFound"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -339,48 +368,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса, может возникать, если пользователь не входит в указанные сегменты",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "404": {
                         "description": "Пользователь с указанным ID не был найден или некоторые из указанных сегментов не существуют",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserNotFound"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserNotFound"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/users/report": {
-            "get": {
-                "description": "Возвращает csv-строку, представляющую собой csv-отчёт,\nсодержащий столбцы ` + "`" + `user_id` + "`" + `, ` + "`" + `segment_name` + "`" + `, ` + "`" + `start_date` + "`" + `,\n` + "`" + `end_date` + "`" + `, обозначающие идентификатор пользователя,\nнаименование сегмента, дату добавления пользователя в сегмент и\nдату выхода пользователя из сегмента соответственно. Строки отчёта\nотсортированы в порядке возрастания по дате добавления пользователя в сегмент.\n\nВ результате выполнения запроса формируется файл и устанавливается заголовок ответа\n` + "`" + `Content-Disposition` + "`" + `, поэтому результат выполнения запроса необходимо скачать.",
-                "tags": [
-                    "users"
-                ],
-                "summary": "Получить отчёт в формате csv",
-                "responses": {
-                    "200": {
-                        "description": "csv-строка, представляющая собой отчёт",
-                        "schema": {
-                            "$ref": "#/definitions/internal_controller_http_v1.MakeReportResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Ошибка валидации данных запроса",
-                        "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
-                        }
-                    },
-                    "500": {
-                        "description": "Внутренняя ошибка сервера",
-                        "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -406,13 +406,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -447,19 +447,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "404": {
                         "description": "Пользователь с указанным ID не был найден",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserNotFound"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserNotFound"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -494,19 +494,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Ошибка валидации данных запроса",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserValidationError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserValidationError"
                         }
                     },
                     "404": {
                         "description": "Пользователь с указанным ID не был найден",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrUserNotFound"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrUserNotFound"
                         }
                     },
                     "500": {
                         "description": "Внутренняя ошибка сервера",
                         "schema": {
-                            "$ref": "#/definitions/avito-rest-api_package_error.ErrInternalServerError"
+                            "$ref": "#/definitions/avito-rest-api_internal_error.ErrInternalServerError"
                         }
                     }
                 }
@@ -622,6 +622,108 @@ const docTemplate = `{
                 }
             }
         },
+        "avito-rest-api_internal_error.ErrInternalServerError": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "originErrorText": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "avito-rest-api_internal_error.ErrReportValidationError": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "originErrorText": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "avito-rest-api_internal_error.ErrSegmentNotFound": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "originErrorText": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "avito-rest-api_internal_error.ErrSegmentValidationError": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "originErrorText": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "avito-rest-api_internal_error.ErrUserNotFound": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "originErrorText": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "avito-rest-api_internal_error.ErrUserValidationError": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "originErrorText": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
         "avito-rest-api_internal_service.SegmentCreateInput": {
             "type": "object",
             "required": [
@@ -671,91 +773,6 @@ const docTemplate = `{
                         1
                     ],
                     "example": 0
-                }
-            }
-        },
-        "avito-rest-api_package_error.ErrInternalServerError": {
-            "type": "object",
-            "properties": {
-                "comment": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "originErrorText": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            }
-        },
-        "avito-rest-api_package_error.ErrSegmentNotFound": {
-            "type": "object",
-            "properties": {
-                "comment": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "originErrorText": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            }
-        },
-        "avito-rest-api_package_error.ErrSegmentValidationError": {
-            "type": "object",
-            "properties": {
-                "comment": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "originErrorText": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            }
-        },
-        "avito-rest-api_package_error.ErrUserNotFound": {
-            "type": "object",
-            "properties": {
-                "comment": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "originErrorText": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            }
-        },
-        "avito-rest-api_package_error.ErrUserValidationError": {
-            "type": "object",
-            "properties": {
-                "comment": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "originErrorText": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
                 }
             }
         },
@@ -924,6 +941,11 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "report": {
+                    "description": "Отчёт в виде csv-строки с разделителями \",\" и символом перехода на новую строку \"\\n\"",
+                    "type": "string"
+                },
+                "report_date": {
+                    "description": "Дата формирования отчёта",
                     "type": "string"
                 }
             }

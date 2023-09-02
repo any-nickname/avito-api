@@ -2,7 +2,7 @@ package pgdb
 
 import (
 	"avito-rest-api/internal/entity"
-	customError "avito-rest-api/package/error"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/package/postgres"
 	"context"
 	"fmt"
