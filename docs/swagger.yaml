@@ -1,0 +1,656 @@
+basePath: /
+definitions:
+  avito-rest-api_internal_entity.Segment:
+    properties:
+      is_deleted:
+        example: false
+        type: boolean
+      name:
+        example: AVITO_MUSIC_SERVICE
+        type: string
+      segment_id:
+        example: 43
+        type: integer
+    type: object
+  avito-rest-api_internal_entity.User:
+    properties:
+      age:
+        example: 26
+        type: integer
+      is_deleted:
+        example: false
+        type: boolean
+      lastname:
+        example: Иванов
+        type: string
+      name:
+        example: Михаил
+        type: string
+      sex:
+        description: Пол, 0 - мужской, 1 - женский
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
+      sex_text:
+        enum:
+        - мужской
+        - женский
+        example: мужской
+        type: string
+      user_id:
+        example: 16
+        type: integer
+    type: object
+  avito-rest-api_internal_entity.UserSegmentInformation:
+    properties:
+      end_date:
+        description: Дата выхода пользователя из сегмента
+        example: ""
+        type: string
+      information_id:
+        description: ID записи в ассоциативной таблице, связывающей пользователей
+          с сегментами
+        example: 179
+        type: integer
+      name:
+        description: Наименование сегмента
+        example: AVITO_MUSIC_SERVICE
+        type: string
+      segment_id:
+        description: ID сегмента
+        example: 43
+        type: integer
+      start_date:
+        description: Дата добавления пользователя в сегмент
+        example: 15:27:32 01.09.2023
+        type: string
+      user_id:
+        description: ID пользователя, который входит в сегмент
+        example: 16
+        type: integer
+    type: object
+  avito-rest-api_internal_entity.UserWithSegments:
+    properties:
+      segments:
+        items:
+          $ref: '#/definitions/avito-rest-api_internal_entity.UserSegmentInformation'
+        type: array
+      user:
+        $ref: '#/definitions/avito-rest-api_internal_entity.User'
+    type: object
+  avito-rest-api_internal_service.SegmentCreateInput:
+    properties:
+      name:
+        description: Имя сегмента
+        example: AVITO_MUSIC_SERVICE
+        type: string
+      percentage:
+        description: Необязательное поле, процент пользователей, которое автоматически
+          войдёт в сегмент при его создании
+        example: 57
+        maximum: 100
+        minimum: 0
+        type: integer
+    required:
+    - name
+    type: object
+  avito-rest-api_internal_service.UserCreateInput:
+    properties:
+      age:
+        example: 26
+        type: integer
+      lastname:
+        example: Иванов
+        type: string
+      name:
+        example: Михаил
+        type: string
+      sex:
+        description: Пол, 0 - мужской, 1 - женский
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
+    required:
+    - age
+    - lastname
+    - name
+    - sex
+    type: object
+  avito-rest-api_package_error.ErrInternalServerError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_package_error.ErrSegmentNotFound:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_package_error.ErrSegmentValidationError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_package_error.ErrUserNotFound:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  avito-rest-api_package_error.ErrUserValidationError:
+    properties:
+      comment:
+        type: string
+      location:
+        type: string
+      originErrorText:
+        type: string
+      title:
+        type: string
+    type: object
+  internal_controller_http_v1.AddUserToSegmentsInput:
+    properties:
+      id:
+        description: Идентификатор пользователя
+        example: 16
+        type: integer
+      segments:
+        description: Сегменты, в которые необходимо добавить пользователя
+        items:
+          properties:
+            end_date:
+              description: Необязательное поле, если отсутствует, значит дата выхода
+                пользователя из сегмента не определена
+              example: 10:00:00 25.09.2023
+              type: string
+            name:
+              description: Наименование сегмента, в который необходимо добавить пользователя
+              example: AVITO_MUSIC_SERVICE
+              type: string
+          required:
+          - name
+          type: object
+        type: array
+    required:
+    - id
+    type: object
+  internal_controller_http_v1.AddUserToSegmentsResponse:
+    properties:
+      message:
+        example: user 16 was successfully added to the segments
+        type: string
+    type: object
+  internal_controller_http_v1.CreateResponse:
+    properties:
+      name:
+        example: AVITO_MUSIC_SERVICE
+        type: string
+    required:
+    - name
+    type: object
+  internal_controller_http_v1.DeleteSegmentByNameResponse:
+    properties:
+      message:
+        example: successfully deleted segment "AVITO_MUSIC_SERVICE"
+        type: string
+    type: object
+  internal_controller_http_v1.DeleteUserFromSegmentsInput:
+    properties:
+      id:
+        description: Идентификатор пользователя
+        example: 16
+        type: integer
+      segments:
+        description: Сегменты, из которых необходимо удалить пользователя
+        items:
+          properties:
+            name:
+              description: Наименование сегмента
+              example: AVITO_MUSIC_SERVICE
+              type: string
+          required:
+          - name
+          type: object
+        type: array
+    required:
+    - id
+    type: object
+  internal_controller_http_v1.DeleteUserFromSegmentsResponse:
+    properties:
+      message:
+        example: user 179 was successfully removed from segments
+        type: string
+    type: object
+  internal_controller_http_v1.GetAllSegmentsResponse:
+    properties:
+      segments:
+        items:
+          $ref: '#/definitions/avito-rest-api_internal_entity.Segment'
+        type: array
+    type: object
+  internal_controller_http_v1.GetAllUsersResponse:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/avito-rest-api_internal_entity.User'
+        type: array
+    type: object
+  internal_controller_http_v1.GetAllUsersWithSegmentsResponse:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/avito-rest-api_internal_entity.UserWithSegments'
+        type: array
+    type: object
+  internal_controller_http_v1.GetSegmentByNameResponse:
+    properties:
+      segment:
+        $ref: '#/definitions/avito-rest-api_internal_entity.Segment'
+    type: object
+  internal_controller_http_v1.GetUserByIDResponse:
+    properties:
+      user:
+        $ref: '#/definitions/avito-rest-api_internal_entity.User'
+    type: object
+  internal_controller_http_v1.GetUserByIDWithSegmentsResponse:
+    properties:
+      user:
+        $ref: '#/definitions/avito-rest-api_internal_entity.UserWithSegments'
+    type: object
+  internal_controller_http_v1.MakeReportResponse:
+    properties:
+      report:
+        type: string
+    type: object
+  internal_controller_http_v1.UserCreateResponse:
+    properties:
+      id:
+        example: 26
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: vladimirxsky@gmail.com
+    name: Грищенко Владимир
+  description: Сервис предоставляет функционал для работы с сегментами и пользователями
+    для целей аналитики
+  title: Сервис по работе с сегментами
+  version: "1.0"
+paths:
+  /api/v1/segments:
+    get:
+      description: Возвращает список всех сегментов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Список всех сегментов
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.GetAllSegmentsResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить список всех сегментов
+      tags:
+      - segments
+    post:
+      consumes:
+      - application/json
+      description: Создаёт сегмент на основе информации в теле запроса
+      parameters:
+      - description: Структура с информацией о создаваемом сегменте
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/avito-rest-api_internal_service.SegmentCreateInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Наименование созданного сегмента
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.CreateResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Создать сегмент
+      tags:
+      - segments
+  /api/v1/segments/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: |-
+        Удаляет сегмент с указанным именем из системы.
+        В случае, если на момент совершения запроса в этот
+        сегмент входят какие-либо пользователи, они автоматически
+        выйдут из данного сегмента.
+      parameters:
+      - description: Наименование сегмента
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Сообщение об успехе
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.DeleteSegmentByNameResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+        "404":
+          description: Сегмент с указанным именем не был найден
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentNotFound'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Удалить сегмент с указанным именем
+      tags:
+      - segments
+    get:
+      description: Возвращает информацию о сегменте с указанным именем
+      parameters:
+      - description: Наименование сегмента
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Сегмент с указанным именем
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.GetSegmentByNameResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentValidationError'
+        "404":
+          description: Сегмент с указанным именем не был найден
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrSegmentNotFound'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить сегмент с указанным именем
+      tags:
+      - segments
+  /api/v1/users:
+    get:
+      description: Возвращает список абсолютно всех пользователей
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Список всех пользователей
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.GetAllUsersResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить список всех пользователей
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: Создаёт пользователя на основе информации в теле запроса
+      parameters:
+      - description: Структура с информацией о создаваемом пользователе
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/avito-rest-api_internal_service.UserCreateInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Идентификатор созданного пользователя
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.UserCreateResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Создать пользователя
+      tags:
+      - users
+  /api/v1/users/{id}:
+    get:
+      description: Возвращает пользователя с указанным ID
+      parameters:
+      - description: ID пользователя
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Пользователь с указанным ID
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.GetUserByIDResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "404":
+          description: Пользователь с указанным ID не был найден
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить пользователя по ID
+      tags:
+      - users
+  /api/v1/users/{id}/withSegments:
+    get:
+      description: Возвращает пользователя с указанным ID, включая в тело ответа список
+        сегментов, в которые пользователь входит на момент совершения запроса
+      parameters:
+      - description: ID пользователя
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Пользователь с его активными сегментами
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.GetUserByIDWithSegmentsResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "404":
+          description: Пользователь с указанным ID не был найден
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить пользователя с его сегментами по ID
+      tags:
+      - users
+  /api/v1/users/addUserToSegments:
+    post:
+      description: Добавляет пользователя с указанным ID в указанные сегменты
+      parameters:
+      - description: Структура, содержащая ID пользователя и наименование сегментов,
+          в которые необходимо добавить пользователя. Поле `end_date` у сегмента является
+          опциональным, и, если не  установлено, сигнализирует о том, что время выхода
+          пользователя из сегмента не определено (пока сегмент  не будет удалён или
+          пользователь не будет удалён из этого сегмента)
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.AddUserToSegmentsInput'
+      responses:
+        "200":
+          description: Сообщение об успехе
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.AddUserToSegmentsResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "404":
+          description: Пользователь с указанным ID не был найден или некоторые из
+            указанных сегментов не существуют
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Добавить пользователя в сегменты
+      tags:
+      - users
+  /api/v1/users/deleteUserFromSegments:
+    post:
+      description: Удаляет пользователя с указанным ID из указанных сегментов
+      parameters:
+      - description: Структура, содержащая ID пользователя и наименования сегментов,
+          из которых пользователя необходимо удалить
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.DeleteUserFromSegmentsInput'
+      responses:
+        "200":
+          description: Сообщение об успехе
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.DeleteUserFromSegmentsResponse'
+        "400":
+          description: Ошибка валидации данных запроса, может возникать, если пользователь
+            не входит в указанные сегменты
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "404":
+          description: Пользователь с указанным ID не был найден или некоторые из
+            указанных сегментов не существуют
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserNotFound'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Удалить пользователя из сегментов
+      tags:
+      - users
+  /api/v1/users/report:
+    get:
+      description: |-
+        Возвращает csv-строку, представляющую собой csv-отчёт,
+        содержащий столбцы `user_id`, `segment_name`, `start_date`,
+        `end_date`, обозначающие идентификатор пользователя,
+        наименование сегмента, дату добавления пользователя в сегмент и
+        дату выхода пользователя из сегмента соответственно. Строки отчёта
+        отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
+
+        В результате выполнения запроса формируется файл и устанавливается заголовок ответа
+        `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
+      responses:
+        "200":
+          description: csv-строка, представляющая собой отчёт
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.MakeReportResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить отчёт в формате csv
+      tags:
+      - users
+  /api/v1/users/withSegments:
+    get:
+      description: Возвращает список всех пользователей, включая список активных для
+        каждого пользователя сегментов на момент совершения запроса
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Список пользователей с их активными сегментами
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.GetAllUsersWithSegmentsResponse'
+        "400":
+          description: Ошибка валидации данных запроса
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrUserValidationError'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/avito-rest-api_package_error.ErrInternalServerError'
+      summary: Получить список всех пользователей, включая их сегменты
+      tags:
+      - users
+swagger: "2.0"
