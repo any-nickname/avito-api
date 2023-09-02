@@ -41,8 +41,9 @@ values
     ('Елена', 'Сергеева', '1', 36),
     ('Никита', 'Романов', '0', 22),
     ('Виктория', 'Ильина', '1', 27),
-    ('Александр', 'Гаврилов', '0', 39);
-	
+    ('Александр', 'Гаврилов', '0', 39),
+    ('Александра', 'Белая', '0', 25);
+
 insert into segments (name)
 values
     ('AVITO_VOICE_MESSAGES'),
@@ -52,8 +53,9 @@ values
     ('AVITO_DISCOUNT_50'),
     ('AVITO_DISCOUNT_70'),
     ('AVITO_MARKET_DISCOUNT_30'),
-    ('AVITO_MARKET_DISCOUNT_45');
-	
+    ('AVITO_MARKET_DISCOUNT_45'),
+    ('AVITO_MUSIC_SERVICE');
+
 insert into users_segments (user_id, segment_id, start_date, end_date)
 values
     (1, 1, '2021-01-01T12:35:50', null),
