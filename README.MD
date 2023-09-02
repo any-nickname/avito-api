@@ -43,6 +43,7 @@ http://localhost:8080/health
 - [Получение пользователя по ID с его сегментами](#users-getWithSegments)
 - [Добавление пользователя в сегменты](#users-addToSegments)
 - [Удаление пользователя из сегментов](#users-deleteFromSegments)
+- [Создание отчёта](#users-makeReport)
 
 ### Создание пользователя<a name="users-create"></a>
 `POST /api/v1/users`
@@ -274,7 +275,7 @@ API - эта информация перечисляется в массиве `
 
 Логика возникновения ошибок здесь такая же, что и в [добавлении пользователя в сегменты](#users-addToSegments)
 
-### Создание отчёта
+### Создание отчёта<a name="users-makeReport"></a>
 `GET /api/v1/users/report`
 
 Пример ответа:
