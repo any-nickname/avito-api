@@ -283,7 +283,8 @@ API - эта информация перечисляется в массиве `
 Пример ответа:
 ```json
 {
-  "report": "user_id,segment_name,start_date,end_date\n6,\"AVITO_MUSIC_SERVICE\", \"10:23:50 01.08.2023\"\n"
+  "report_date": "2023-09-02 19:52:04.827282019 +0000 UTC m=+101.813860480",
+  "report": "UserID,SegmentName,StartDate,EndDate\n1,AVITO_VOICE_MESSAGES,12:35:50 01.01.2023,\n"
 }
 ```
 
