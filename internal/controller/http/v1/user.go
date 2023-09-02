@@ -24,8 +24,8 @@ func newUserRoutes(g *echo.Group, userService service.User) {
 	g.GET("/withSegments", r.getAllWithSegments)
 	g.GET("/:id", r.getByID)
 	g.GET("/:id/withSegments", r.getByIDWithSegments)
-	g.POST("/addToSegments", r.addUserToSegments)
-	g.POST("/deleteFromSegments", r.deleteUserFromSegments)
+	g.POST("/addUserToSegments", r.addUserToSegments)
+	g.POST("/deleteUserFromSegments", r.deleteUserFromSegments)
 	g.GET("/report", r.makeReport)
 }
 
@@ -40,8 +40,8 @@ type UserCreateResponse struct {
 // @Produce json
 // @Param data body service.UserCreateInput true "Структура с информацией о создаваемом пользователе"
 // @Success 201 {object} UserCreateResponse "Идентификатор созданного пользователя"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users [post]
 func (r *userRoutes) create(c echo.Context) error {
 	var input service.UserCreateInput
@@ -80,8 +80,8 @@ type GetAllUsersResponse struct {
 // @Tags users
 // @Produce json
 // @Success 200 {object} GetAllUsersResponse "Список всех пользователей"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users [get]
 func (r *userRoutes) getAll(c echo.Context) error {
 	users, err := r.userService.GetAllUsers(c.Request().Context())
@@ -100,8 +100,8 @@ type GetAllUsersWithSegmentsResponse struct {
 // @Tags users
 // @Produce json
 // @Success 200 {object} GetAllUsersWithSegmentsResponse "Список пользователей с их активными сегментами"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users/withSegments [get]
 func (r *userRoutes) getAllWithSegments(c echo.Context) error {
 	usersWithSegments, err := r.userService.GetAllUsersWithSegments(c.Request().Context())
@@ -121,9 +121,9 @@ type GetUserByIDResponse struct {
 // @Produce json
 // @Param id path int true "ID пользователя"
 // @Success 200 {object} GetUserByIDResponse "Пользователь с указанным ID"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 404 {object} error.ErrUserNotFound "Пользователь с указанным ID не был найден"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 404 {object} customError.ErrUserNotFound "Пользователь с указанным ID не был найден"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users/{id} [get]
 func (r *userRoutes) getByID(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
@@ -154,9 +154,9 @@ type GetUserByIDWithSegmentsResponse struct {
 // @Produce json
 // @Param id path int true "ID пользователя"
 // @Success 200 {object} GetUserByIDWithSegmentsResponse "Пользователь с его активными сегментами"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 404 {object} error.ErrUserNotFound "Пользователь с указанным ID не был найден"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 404 {object} customError.ErrUserNotFound "Пользователь с указанным ID не был найден"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users/{id}/withSegments [get]
 func (r *userRoutes) getByIDWithSegments(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
@@ -194,11 +194,11 @@ type AddUserToSegmentsResponse struct {
 // @Summary Добавить пользователя в сегменты
 // @Description Добавляет пользователя с указанным ID в указанные сегменты
 // @Tags users
-// @Param data body AddUserToSegmentsInput true "Структура, содержащая ID пользователя и наименование сегментов, в которые необходимо добавить пользователя. Поле `end_date` у сегмента является опциональным, и, если не  установлено, сигнализирует о том, что время выхода пользователя из сегмента не определено (пока сегмент  не будет удалён или пользователь будет удалён из этого сегмента)"
+// @Param data body AddUserToSegmentsInput true "Структура, содержащая ID пользователя и наименование сегментов, в которые необходимо добавить пользователя. Поле `end_date` у сегмента является опциональным, и, если не  установлено, сигнализирует о том, что время выхода пользователя из сегмента не определено (пока сегмент  не будет удалён или пользователь не будет удалён из этого сегмента)"
 // @Success 200 {object} AddUserToSegmentsResponse "Сообщение об успехе"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 404 {object} error.ErrUserNotFound "Пользователь с указанным ID не был найден или некоторые из указанных сегментов не существуют"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 404 {object} customError.ErrUserNotFound "Пользователь с указанным ID не был найден или некоторые из указанных сегментов не существуют"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users/addUserToSegments [post]
 func (r *userRoutes) addUserToSegments(c echo.Context) error {
 	var segmentsInput AddUserToSegmentsInput
@@ -251,9 +251,9 @@ type DeleteUserFromSegmentsResponse struct {
 // @Tags users
 // @Param data body DeleteUserFromSegmentsInput true "Структура, содержащая ID пользователя и наименования сегментов, из которых пользователя необходимо удалить"
 // @Success 200 {object} DeleteUserFromSegmentsResponse "Сообщение об успехе"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса, может возникать, если пользователь не входит в указанные сегменты"
-// @Failure 404 {object} error.ErrUserNotFound "Пользователь с указанным ID не был найден или некоторые из указанных сегментов не существуют"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса, может возникать, если пользователь не входит в указанные сегменты"
+// @Failure 404 {object} customError.ErrUserNotFound "Пользователь с указанным ID не был найден или некоторые из указанных сегментов не существуют"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users/deleteUserFromSegments [post]
 func (r *userRoutes) deleteUserFromSegments(c echo.Context) error {
 	var input DeleteUserFromSegmentsInput
@@ -280,10 +280,6 @@ func (r *userRoutes) deleteUserFromSegments(c echo.Context) error {
 		return errorHandler(c, err)
 	}
 
-	type response struct {
-		Message string `json:"message"`
-	}
-
 	return c.JSON(http.StatusOK, DeleteUserFromSegmentsResponse{
 		Message: fmt.Sprintf("user %d was successfully removed from segments", id),
 	})
@@ -305,8 +301,8 @@ type MakeReportResponse struct {
 // @Description `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
 // @Tags users
 // @Success 200 {object} MakeReportResponse "csv-строка, представляющая собой отчёт"
-// @Failure 400 {object} error.ErrUserValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrUserValidationError "Ошибка валидации данных запроса"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users/report [get]
 func (r *userRoutes) makeReport(c echo.Context) error {
 	marshalledCSV, err := r.userService.MakeReport(c.Request().Context())

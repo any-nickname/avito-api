@@ -20,12 +20,12 @@ type Config struct {
 		Port   string `yaml:"port" env:"HTTP_PORT"`
 	} `yaml:"http"`
 	PostgreSQL struct {
-		Host        string `yaml:"host" env:"POSTGRE_HOST"`
-		Port        string `yaml:"port" env:"POSTGRE_PORT"`
-		Username    string `yaml:"username" env:"POSTGRE_USERNAME"`
-		Password    string `yaml:"password" env:"POSTGRE_PASSWORD"`
-		Database    string `yaml:"database" env:"POSTGRE_DATABASE"`
-		MaxPoolSize int    `yaml:"max_pool_size" env:"POSTGRE_MAX_POOL_SIZE"`
+		Host        string `yaml:"host" env:"POSTGRES_HOST"`
+		Port        string `yaml:"port" env:"POSTGRES_PORT"`
+		Username    string `yaml:"username" env:"POSTGRES_USER"`
+		Password    string `yaml:"password" env:"POSTGRES_PASSWORD"`
+		Database    string `yaml:"database" env:"POSTGRES_DATABASE"`
+		MaxPoolSize int    `yaml:"max_pool_size" env:"POSTGRES_MAX_POOL_SIZE"`
 	} `yaml:"postgresql"`
 }
 

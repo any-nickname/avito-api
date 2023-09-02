@@ -8,9 +8,9 @@ http:
   bind_ip: localhost
   port: 8080
 postgresql:
-  host: localhost
-  port: 5433
-  username: postgres
-  password: admin
+  host: 0.0.0.0
+  port: 5432
+  username: root
+  password: root
   database: segmentation-service
   max_pool_size: 20

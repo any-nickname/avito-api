@@ -35,8 +35,8 @@ type CreateResponse struct {
 // @Produce json
 // @Param data body service.SegmentCreateInput true "Структура с информацией о создаваемом сегменте"
 // @Success 201 {object} CreateResponse "Наименование созданного сегмента"
-// @Failure 400 {object} error.ErrSegmentValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrSegmentValidationError "Ошибка валидации данных запроса"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/segments [post]
 func (r *segmentRoutes) create(c echo.Context) error {
 	var input service.SegmentCreateInput
@@ -68,8 +68,8 @@ type GetAllSegmentsResponse struct {
 // @Tags segments
 // @Produce json
 // @Success 200 {object} GetAllSegmentsResponse "Список всех сегментов"
-// @Failure 400 {object} error.ErrSegmentValidationError "Ошибка валидации данных запроса"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrSegmentValidationError "Ошибка валидации данных запроса"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/segments [get]
 func (r *segmentRoutes) getAll(c echo.Context) error {
 	sType := c.QueryParam("segment_type")
@@ -116,9 +116,9 @@ type GetSegmentByNameResponse struct {
 // @Produce json
 // @Param name path string true "Наименование сегмента"
 // @Success 200 {object} GetSegmentByNameResponse "Сегмент с указанным именем"
-// @Failure 400 {object} error.ErrSegmentValidationError "Ошибка валидации данных запроса"
-// @Failure 404 {object} error.ErrSegmentNotFound "Сегмент с указанным именем не был найден"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrSegmentValidationError "Ошибка валидации данных запроса"
+// @Failure 404 {object} customError.ErrSegmentNotFound "Сегмент с указанным именем не был найден"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/segments/{name} [get]
 func (r *segmentRoutes) getByName(c echo.Context) error {
 	name := c.Param("name")
@@ -145,9 +145,9 @@ type DeleteSegmentByNameResponse struct {
 // @Produce json
 // @Param name path string true "Наименование сегмента"
 // @Success 200 {object} DeleteSegmentByNameResponse "Сообщение об успехе"
-// @Failure 400 {object} error.ErrSegmentValidationError "Ошибка валидации данных запроса"
-// @Failure 404 {object} error.ErrSegmentNotFound "Сегмент с указанным именем не был найден"
-// @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
+// @Failure 400 {object} customError.ErrSegmentValidationError "Ошибка валидации данных запроса"
+// @Failure 404 {object} customError.ErrSegmentNotFound "Сегмент с указанным именем не был найден"
+// @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/segments/{name} [delete]
 func (r *segmentRoutes) deleteByName(c echo.Context) error {
 	name := c.Param("name")
