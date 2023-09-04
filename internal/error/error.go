@@ -3,11 +3,11 @@ package error
 import "fmt"
 
 type ErrBase struct {
-	OriginError     error `json:"-"`
-	OriginErrorText string
-	Title           string
-	Comment         string
-	Location        string
+	OriginError     error  `json:"-"`
+	OriginErrorText string `json:"origin_error_text"`
+	Title           string `json:"title"`
+	Comment         string `json:"comment"`
+	Location        string `json:"location"`
 }
 
 func (e ErrBase) Error() string {

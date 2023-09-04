@@ -19,6 +19,7 @@ func newReportRoutes(g *echo.Group, reportService service.Report) {
 	g.GET("", r.makeReport)
 }
 
+// MakeReportResponse - структура ответа на запрос о создании отчёта
 type MakeReportResponse struct {
 	// Дата формирования отчёта
 	ReportDate string `json:"report_date"`
@@ -33,9 +34,6 @@ type MakeReportResponse struct {
 // @Description наименование сегмента, дату добавления пользователя в сегмент и
 // @Description дату выхода пользователя из сегмента соответственно. Строки отчёта
 // @Description отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
-// @Description
-// @Description В результате выполнения запроса формируется файл и устанавливается заголовок ответа
-// @Description `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
 // @Tags reports
 // @Success 200 {object} MakeReportResponse "Структура, содержащая дату формирования отчёта и отчёт в виде csv-строки"
 // @Failure 400 {object} error.ErrReportValidationError "Ошибка валидации данных запроса"

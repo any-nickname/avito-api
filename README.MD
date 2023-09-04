@@ -55,7 +55,7 @@ http://localhost:8080/health
 {
   "name": "Михаил",
   "lastname": "Иванов",
-  "age": 26,
+  "age": 27,
   "sex": 0
 }
 ```
@@ -141,7 +141,7 @@ http://localhost:8080/health
       "lastname": "Иванов",
       "sex": 0,
       "sex_text": "мужской",
-      "age": 26,
+      "age": 27,
       "is_deleted": false
     }
   ]
@@ -172,7 +172,7 @@ http://localhost:8080/health
         "lastname": "Иванов",
         "sex": 0,
         "sex_text": "мужской",
-        "age": 26,
+        "age": 27,
         "is_deleted": false
       }
     }
@@ -208,7 +208,7 @@ API - эта информация перечисляется в массиве `
       "lastname": "Иванов",
       "sex": 0,
       "sex_text": "мужской",
-      "age": 26,
+      "age": 27,
       "is_deleted": false
     }
   }
@@ -283,8 +283,8 @@ API - эта информация перечисляется в массиве `
 Пример ответа:
 ```json
 {
-  "report_date": "2023-09-02 19:52:04.827282019 +0000 UTC m=+101.813860480",
-  "report": "UserID,SegmentName,StartDate,EndDate\n1,AVITO_VOICE_MESSAGES,12:35:50 01.01.2023,\n"
+  "report_date": "19:52:04 02.09.2023",
+  "report": "user_id,segment_name,start_date,end_date\n1,AVITO_VOICE_MESSAGES,12:35:50 01.01.2023,\n"
 }
 ```
 

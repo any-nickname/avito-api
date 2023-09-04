@@ -11,8 +11,8 @@ type Report struct {
 }
 
 type ReportRow struct {
-	UserID      int    `json:"user_id"`
-	SegmentName string `json:"segment_name"`
-	StartDate   string `json:"start_date"` // Дата добавления пользователя в сегмент SegmentName
-	EndDate     string `json:"end_date"`   // Дата выхода пользователя из сегмента, может быть пустой
+	UserID      int    `json:"user_id" csv:"user_id"`
+	SegmentName string `json:"segment_name" csv:"segment_name"`
+	StartDate   string `json:"start_date" csv:"start_date"` // Дата добавления пользователя в сегмент SegmentName
+	EndDate     string `json:"end_date" csv:"end_date"`     // Дата выхода пользователя из сегмента, может быть пустой
 }

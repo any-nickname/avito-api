@@ -45,7 +45,7 @@ func (r *ReportRepository) MakeReport(ctx context.Context) (entity.Report, error
 		}}
 	}
 
-	report := entity.Report{ReportDate: time.Now().String()}
+	report := entity.Report{ReportDate: time.Now().Format("15:04:05 02.01.2006")}
 	for rows.Next() {
 		var reportRow entity.ReportRow
 		err = rows.Scan(

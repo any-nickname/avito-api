@@ -49,6 +49,29 @@ func (r *segmentRoutes) create(c echo.Context) error {
 		}})
 	}
 
+	// Валидация
+	// 1. Указано наименование сегмента
+	if input.Name == "" {
+		return errorHandler(c, customError.ErrSegmentValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Field \"name\" was not provided",
+			Location: "SegmentRoutes.create - validation",
+		}})
+	}
+	// 2. Длина имени сегмента до 1000 символов
+	if len(input.Name) > 1000 {
+		return errorHandler(c, customError.ErrSegmentValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Field \"name\" cannot have length over 1000 symbols",
+			Location: "SegmentRoutes.create - validation",
+		}})
+	}
+	// 3. percentage, если есть, является положительным целым числом до 100
+	if input.PercentageOfUsersAdded < 0 || input.PercentageOfUsersAdded > 100 {
+		return errorHandler(c, customError.ErrSegmentValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Field \"percentage\", if provided, must be a positive integer number from range [1, 100]",
+			Location: "SegmentRoutes.create - validation",
+		}})
+	}
+
 	name, err := r.segmentService.CreateSegment(c.Request().Context(), input)
 	if err != nil {
 		return errorHandler(c, err)
@@ -67,6 +90,7 @@ type GetAllSegmentsResponse struct {
 // @Description Возвращает список всех сегментов
 // @Tags segments
 // @Produce json
+// @Param segment_type query string false "Параметр, определяющий, сегменты какого типа (живые и(или) удалённые) необходимо вернуть. Значение `both` предполагает, что будут возвращены сегменты обоих типов (то есть абсолютно все сегменты, когда-либо созданные в системе). Значение `alive` предполагает, что будут возвращены только живые (то есть не помеченные как удалённые) сегменты. Значение `deleted` предполагает, что будут возвращены только сегменты, помеченные как удалённые. Отсутствие параметра равносильно параметру со значением `both`."
 // @Success 200 {object} GetAllSegmentsResponse "Список всех сегментов"
 // @Failure 400 {object} customError.ErrSegmentValidationError "Ошибка валидации данных запроса"
 // @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"

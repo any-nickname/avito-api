@@ -6,6 +6,8 @@ import (
 	"context"
 )
 
+//go:generate mockgen -source=service.go -destination=mocks/mock.go
+
 type User interface {
 	CreateUser(ctx context.Context, input UserCreateInput) (int, error)
 	GetAllUsers(ctx context.Context) ([]entity.User, error)
