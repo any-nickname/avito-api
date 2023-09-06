@@ -133,32 +133,163 @@ func TestSegmentRoutes_create(t *testing.T) {
 	}
 }
 
-//TODO Написать тест для getAll
-//func TestSegmentRoutes_getAll(t *testing.T) {
-//	type args struct {
-//		ctx        context.Context
-//		queryParam string
-//	}
-//
-//	type MockBehaviour func(m *mock_service.MockSegment, args args)
-//
-//	testCases := []struct {
-//		name                 string
-//		args                 args
-//		inputBody            string
-//		mockBehaviour        MockBehaviour
-//		expectedStatusCode   int
-//		expectedResponseBody string
-//	}{
-//		{
-//			name: "Ok",
-//			args: args{
-//				ctx:        nil,
-//				queryParam: "",
-//			},
-//		},
-//	}
-//}
+func TestSegmentRoutes_getAll(t *testing.T) {
+	type args struct {
+		ctx   context.Context
+		query string
+	}
+
+	getSegmentType := func(a args) int {
+		switch a.query {
+		case "":
+			return 2
+		case "both":
+			return 2
+		case "alive":
+			return 0
+		case "deleted":
+			return 1
+		default:
+			return -1
+		}
+	}
+
+	type MockBehaviour func(m *mock_service.MockSegment, args args)
+
+	testCases := []struct {
+		name                 string
+		args                 args
+		mockBehaviour        MockBehaviour
+		expectedStatusCode   int
+		expectedResponseBody string
+	}{
+		{
+			name: "Ok",
+			args: args{
+				ctx:   context.Background(),
+				query: "",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetAllSegments(args.ctx, getSegmentType(args)).Return([]entity.Segment{
+					{
+						ID:        1,
+						Name:      "AVITO_BAKERY",
+						IsDeleted: false,
+					},
+					{
+						ID:        2,
+						Name:      "AVITO_AIRLINES",
+						IsDeleted: true,
+					},
+				}, nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"segments":[{"segment_id":1,"name":"AVITO_BAKERY","is_deleted":false},{"segment_id":2,"name":"AVITO_AIRLINES","is_deleted":true}]}` + "\n",
+		},
+		{
+			name: "Ok, segment_type=both",
+			args: args{
+				ctx:   context.Background(),
+				query: "both",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetAllSegments(args.ctx, getSegmentType(args)).Return([]entity.Segment{
+					{
+						ID:        1,
+						Name:      "AVITO_BAKERY",
+						IsDeleted: false,
+					},
+					{
+						ID:        2,
+						Name:      "AVITO_AIRLINES",
+						IsDeleted: true,
+					},
+				}, nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"segments":[{"segment_id":1,"name":"AVITO_BAKERY","is_deleted":false},{"segment_id":2,"name":"AVITO_AIRLINES","is_deleted":true}]}` + "\n",
+		},
+		{
+			name: "Ok, segment_type=alive",
+			args: args{
+				ctx:   context.Background(),
+				query: "alive",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetAllSegments(args.ctx, getSegmentType(args)).Return([]entity.Segment{
+					{
+						ID:        1,
+						Name:      "AVITO_BAKERY",
+						IsDeleted: false,
+					},
+				}, nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"segments":[{"segment_id":1,"name":"AVITO_BAKERY","is_deleted":false}]}` + "\n",
+		},
+		{
+			name: "Ok, segment_type=deleted",
+			args: args{
+				ctx:   context.Background(),
+				query: "deleted",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetAllSegments(args.ctx, getSegmentType(args)).Return([]entity.Segment{
+					{
+						ID:        1,
+						Name:      "AVITO_AIRLINES",
+						IsDeleted: true,
+					},
+				}, nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"segments":[{"segment_id":1,"name":"AVITO_AIRLINES","is_deleted":true}]}` + "\n",
+		},
+		{
+			name: "Invalid segment_type",
+			args: args{
+				ctx:   context.Background(),
+				query: "sobaka-barabaka",
+			},
+			mockBehaviour:        func(m *mock_service.MockSegment, args args) {},
+			expectedStatusCode:   400,
+			expectedResponseBody: `{"origin_error_text":"","title":"ErrSegmentValidationError","comment":"Invalid \"segment_type\" param was given, valid values: [\"alive\", \"deleted\", \"both\"]","location":"SegmentRoutes.getAll - c.QueryParam"}` + "\n",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			// Инициализация зависимостей
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
+
+			// Инициализация мока сервиса
+			segment := mock_service.NewMockSegment(ctrl)
+			tc.mockBehaviour(segment, tc.args)
+			services := &service.Services{Segment: segment}
+
+			// Создание тестового сервера
+			e := echo.New()
+			g := e.Group("/segments")
+			newSegmentRoutes(g, services.Segment)
+
+			// Создание запроса
+			w := httptest.NewRecorder()
+			URL := "/segments"
+			if tc.args.query != "" {
+				URL = fmt.Sprintf("%s?segment_type=%s", URL, tc.args.query)
+			}
+			req := httptest.NewRequest(http.MethodGet, URL, nil)
+
+			// Выполнение запроса
+			e.ServeHTTP(w, req)
+
+			// Проверка ответа
+			assert.Equal(t, tc.expectedStatusCode, w.Code)
+			assert.Equal(t, tc.expectedResponseBody, w.Body.String())
+		})
+	}
+}
 
 func TestSegmentRoutes_getByName(t *testing.T) {
 	type args struct {
@@ -248,6 +379,101 @@ func TestSegmentRoutes_getByName(t *testing.T) {
 			// Создание запроса
 			w := httptest.NewRecorder()
 			req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/segments/%s", url.PathEscape(tc.args.name)), nil)
+
+			// Выполнение запроса
+			e.ServeHTTP(w, req)
+
+			// Проверка ответа
+			assert.Equal(t, tc.expectedStatusCode, w.Code)
+			assert.Equal(t, tc.expectedResponseBody, w.Body.String())
+		})
+	}
+}
+
+func TestSegmentRoutes_deleteByName(t *testing.T) {
+	type args struct {
+		ctx  context.Context
+		name string
+	}
+
+	type MockBehaviour func(m *mock_service.MockSegment, args args)
+
+	testCases := []struct {
+		name                 string
+		args                 args
+		mockBehaviour        MockBehaviour
+		expectedStatusCode   int
+		expectedResponseBody string
+	}{
+		{
+			name: "Ok",
+			args: args{
+				ctx:  context.Background(),
+				name: "AVITO_BAKERY",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().DeleteSegment(args.ctx, args.name).Return(nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"message":"successfully deleted segment \"AVITO_BAKERY\""}` + "\n",
+		},
+		{
+			name: "Segment does not exist",
+			args: args{
+				ctx:  context.Background(),
+				name: "AVITO_BAKERY",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().DeleteSegment(args.ctx, args.name).Return(customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Unable to delete segment \"%s\" because it does not exist", args.name),
+					Location: "SegmentService.DeleteSegment - s.doesSegmentExist",
+				}})
+			},
+			expectedStatusCode: 404,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrSegmentNotFound","comment":"Unable to delete segment \"%s\" because it does not exist","location":"SegmentService.DeleteSegment - s.doesSegmentExist"}`,
+				"AVITO_BAKERY",
+			) + "\n",
+		},
+		{
+			name: "Segment was deleted earlier",
+			args: args{
+				ctx:  context.Background(),
+				name: "AVITO_BAKERY",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().DeleteSegment(args.ctx, args.name).Return(customError.ErrSegmentDeleted{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Unable to delete segment \"%s\" because it does not exist (segment was deleted earlier and was not created again)", args.name),
+					Location: "SegmentService.DeleteSegment - s.isSegmentDeleted",
+				}})
+			},
+			expectedStatusCode: 400,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrSegmentDeleted","comment":"Unable to delete segment \"%s\" because it does not exist (segment was deleted earlier and was not created again)","location":"SegmentService.DeleteSegment - s.isSegmentDeleted"}`,
+				"AVITO_BAKERY",
+			) + "\n",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			// Инициализация зависимостей
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
+
+			// Инициализация мока сервиса
+			segment := mock_service.NewMockSegment(ctrl)
+			tc.mockBehaviour(segment, tc.args)
+			services := &service.Services{Segment: segment}
+
+			// Создание тестового сервера
+			e := echo.New()
+			g := e.Group("/segments")
+			newSegmentRoutes(g, services.Segment)
+
+			// Создание запроса
+			w := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/segments/%s", url.PathEscape(tc.args.name)), nil)
 
 			// Выполнение запроса
 			e.ServeHTTP(w, req)

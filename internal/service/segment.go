@@ -153,7 +153,7 @@ func (s *SegmentService) DeleteSegment(ctx context.Context, name string) error {
 	if !exist {
 		return customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
 			OriginError: nil,
-			Comment:     fmt.Sprintf("Unable to delete segment %s because it does not exist", name),
+			Comment:     fmt.Sprintf("Unable to delete segment \"%s\" because it does not exist", name),
 			Location:    "SegmentService.DeleteSegment - s.doesSegmentExist",
 		}}
 	}
@@ -169,7 +169,7 @@ func (s *SegmentService) DeleteSegment(ctx context.Context, name string) error {
 	if isDeleted {
 		return customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
 			OriginError: nil,
-			Comment:     fmt.Sprintf("Unable to delete segment %s because it does not exist (segment was deleted earlier and was not created again)", name),
+			Comment:     fmt.Sprintf("Unable to delete segment \"%s\" because it does not exist (segment was deleted earlier and was not created again)", name),
 			Location:    "SegmentService.DeleteSegment - s.isSegmentDeleted",
 		}}
 	}

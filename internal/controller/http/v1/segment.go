@@ -105,10 +105,8 @@ func (r *segmentRoutes) getAll(c echo.Context) error {
 	case "deleted":
 	default:
 		return errorHandler(c, customError.ErrSegmentValidationError{ErrBase: customError.ErrBase{
-			OriginError:     nil,
-			OriginErrorText: "",
-			Comment:         "Invalid \"segment_type\" param was given, valid values: [\"alive\", \"deleted\", \"both\"]",
-			Location:        "SegmentRoutes.getAll - c.QueryParam",
+			Comment:  "Invalid \"segment_type\" param was given, valid values: [\"alive\", \"deleted\", \"both\"]",
+			Location: "SegmentRoutes.getAll - c.QueryParam",
 		}})
 	}
 
