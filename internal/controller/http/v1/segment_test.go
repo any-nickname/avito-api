@@ -1,15 +1,19 @@
 package v1
 
 import (
+	"avito-rest-api/internal/entity"
+	customError "avito-rest-api/internal/error"
 	"avito-rest-api/internal/service"
 	mock_service "avito-rest-api/internal/service/mocks"
 	"bytes"
 	"context"
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"testing"
 )
 
@@ -34,16 +38,16 @@ func TestSegmentRoutes_create(t *testing.T) {
 			args: args{
 				ctx: context.Background(),
 				input: service.SegmentCreateInput{
-					Name:                   "AVITO_AIRLINES",
+					Name:                   "AVITO_BAKERY",
 					PercentageOfUsersAdded: 20,
 				},
 			},
-			inputBody: `{"name":"AVITO_AIRLINES","percentage":20}`,
+			inputBody: `{"name":"AVITO_BAKERY","percentage":20}`,
 			mockBehaviour: func(m *mock_service.MockSegment, args args) {
-				m.EXPECT().CreateSegment(args.ctx, args.input).Return("AVITO_AIRLINES", nil)
+				m.EXPECT().CreateSegment(args.ctx, args.input).Return("AVITO_BAKERY", nil)
 			},
 			expectedStatusCode:   201,
-			expectedResponseBody: `{"name":"AVITO_AIRLINES"}` + "\n",
+			expectedResponseBody: `{"name":"AVITO_BAKERY"}` + "\n",
 		},
 		{
 			name:                 "Invalid segment name: not provided",
@@ -64,7 +68,7 @@ func TestSegmentRoutes_create(t *testing.T) {
 		{
 			name:                 "Invalid segment percentage: negative number",
 			args:                 args{},
-			inputBody:            `{"name":"AVITO_AIRLINES","percentage":-25}`,
+			inputBody:            `{"name":"AVITO_BAKERY","percentage":-25}`,
 			mockBehaviour:        func(m *mock_service.MockSegment, args args) {},
 			expectedStatusCode:   400,
 			expectedResponseBody: `{"origin_error_text":"","title":"ErrSegmentValidationError","comment":"Field \"percentage\", if provided, must be a positive integer number from range [1, 100]","location":"SegmentRoutes.create - validation"}` + "\n",
@@ -72,10 +76,29 @@ func TestSegmentRoutes_create(t *testing.T) {
 		{
 			name:                 "Invalid segment percentage: number over 100",
 			args:                 args{},
-			inputBody:            `{"name":"AVITO_AIRLINES","percentage":121}`,
+			inputBody:            `{"name":"AVITO_BAKERY","percentage":121}`,
 			mockBehaviour:        func(m *mock_service.MockSegment, args args) {},
 			expectedStatusCode:   400,
 			expectedResponseBody: `{"origin_error_text":"","title":"ErrSegmentValidationError","comment":"Field \"percentage\", if provided, must be a positive integer number from range [1, 100]","location":"SegmentRoutes.create - validation"}` + "\n",
+		},
+		{
+			name: "Segment with given name already exists",
+			args: args{
+				ctx:   context.Background(),
+				input: service.SegmentCreateInput{Name: "AVITO_BAKERY"},
+			},
+			inputBody: `{"name":"AVITO_BAKERY"}`,
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().CreateSegment(args.ctx, args.input).Return("", customError.ErrSegmentAlreadyExists{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Segment with the given name \"%s\" already exists", args.input.Name),
+					Location: "SegmentService.CreateSegment - doesSegmentExist",
+				}})
+			},
+			expectedStatusCode: 400,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrSegmentAlreadyExists","comment":"Segment with the given name \"%s\" already exists","location":"SegmentService.CreateSegment - doesSegmentExist"}`,
+				"AVITO_BAKERY",
+			) + "\n",
 		},
 	}
 
@@ -99,6 +122,132 @@ func TestSegmentRoutes_create(t *testing.T) {
 			w := httptest.NewRecorder()
 			req := httptest.NewRequest(http.MethodPost, "/segments", bytes.NewBufferString(tc.inputBody))
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+
+			// Выполнение запроса
+			e.ServeHTTP(w, req)
+
+			// Проверка ответа
+			assert.Equal(t, tc.expectedStatusCode, w.Code)
+			assert.Equal(t, tc.expectedResponseBody, w.Body.String())
+		})
+	}
+}
+
+//TODO Написать тест для getAll
+//func TestSegmentRoutes_getAll(t *testing.T) {
+//	type args struct {
+//		ctx        context.Context
+//		queryParam string
+//	}
+//
+//	type MockBehaviour func(m *mock_service.MockSegment, args args)
+//
+//	testCases := []struct {
+//		name                 string
+//		args                 args
+//		inputBody            string
+//		mockBehaviour        MockBehaviour
+//		expectedStatusCode   int
+//		expectedResponseBody string
+//	}{
+//		{
+//			name: "Ok",
+//			args: args{
+//				ctx:        nil,
+//				queryParam: "",
+//			},
+//		},
+//	}
+//}
+
+func TestSegmentRoutes_getByName(t *testing.T) {
+	type args struct {
+		ctx  context.Context
+		name string
+	}
+
+	type MockBehaviour func(m *mock_service.MockSegment, args args)
+
+	testCases := []struct {
+		name                 string
+		args                 args
+		mockBehaviour        MockBehaviour
+		expectedStatusCode   int
+		expectedResponseBody string
+	}{
+		{
+			name: "Ok",
+			args: args{
+				ctx:  context.Background(),
+				name: "AVITO_BAKERY",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetSegmentByName(args.ctx, args.name).Return(entity.Segment{
+					ID:        1,
+					Name:      "AVITO_BAKERY",
+					IsDeleted: false,
+				}, nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"segment":{"segment_id":1,"name":"AVITO_BAKERY","is_deleted":false}}` + "\n",
+		},
+		{
+			name: "Segment with given name not found",
+			args: args{
+				ctx:  context.Background(),
+				name: "AVITO_BAKERY",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetSegmentByName(args.ctx, args.name).Return(entity.Segment{}, customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Segment with provided name \"%s\" does not exist", args.name),
+					Location: "SegmentService.GetSegmentByName - doesSegmentExist",
+				}})
+			},
+			expectedStatusCode: 404,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrSegmentNotFound","comment":"Segment with provided name \"%s\" does not exist","location":"SegmentService.GetSegmentByName - doesSegmentExist"}`,
+				"AVITO_BAKERY",
+			) + "\n",
+		},
+		{
+			name: "Segment with given name was deleted",
+			args: args{
+				ctx:  context.Background(),
+				name: "AVITO_BAKERY",
+			},
+			mockBehaviour: func(m *mock_service.MockSegment, args args) {
+				m.EXPECT().GetSegmentByName(args.ctx, args.name).Return(entity.Segment{}, customError.ErrSegmentDeleted{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Segment with provided name \"%s\" was deleted. If you want work with this segment, recover it by performing create operation with this segment name", args.name),
+					Location: "SegmentService.GetSegmentByName - isSegmentDeleted",
+				}})
+			},
+			expectedStatusCode: 400,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrSegmentDeleted","comment":"Segment with provided name \"%s\" was deleted. If you want work with this segment, recover it by performing create operation with this segment name","location":"SegmentService.GetSegmentByName - isSegmentDeleted"}`,
+				"AVITO_BAKERY",
+			) + "\n",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			// Инициализация зависимостей
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
+
+			// Инициализация мока сервиса
+			segment := mock_service.NewMockSegment(ctrl)
+			tc.mockBehaviour(segment, tc.args)
+			services := &service.Services{Segment: segment}
+
+			// Создание тестового сервера
+			e := echo.New()
+			g := e.Group("/segments")
+			newSegmentRoutes(g, services.Segment)
+
+			// Создание запроса
+			w := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/segments/%s", url.PathEscape(tc.args.name)), nil)
 
 			// Выполнение запроса
 			e.ServeHTTP(w, req)

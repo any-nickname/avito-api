@@ -131,7 +131,7 @@ func (r *SegmentRepository) GetSegmentByName(ctx context.Context, name string) (
 		return entity.Segment{}, customError.ErrInternalServerError{ErrBase: customError.ErrBase{
 			OriginError:     err,
 			OriginErrorText: err.Error(),
-			Comment:         "failed to perform sql query",
+			Comment:         "Failed to perform sql query",
 			Location:        "SegmentRepository.GetSegmentByName - r.Pool.Query",
 		}}
 	}
@@ -147,7 +147,7 @@ func (r *SegmentRepository) GetSegmentByName(ctx context.Context, name string) (
 			return entity.Segment{}, customError.ErrInternalServerError{ErrBase: customError.ErrBase{
 				OriginError:     err,
 				OriginErrorText: err.Error(),
-				Comment:         "failed to scan segment to structure",
+				Comment:         "Failed to scan segment to structure",
 				Location:        "SegmentRepository.GetSegmentByName - rows.Scan",
 			}}
 		}
@@ -155,10 +155,8 @@ func (r *SegmentRepository) GetSegmentByName(ctx context.Context, name string) (
 	}
 
 	return entity.Segment{}, customError.ErrUserNotFound{ErrBase: customError.ErrBase{
-		OriginError:     nil,
-		OriginErrorText: "",
-		Comment:         fmt.Sprintf("Segment with name %s does not exist", name),
-		Location:        "SegmentRepository.GetSegmentByName",
+		Comment:  fmt.Sprintf("Segment with name %s does not exist", name),
+		Location: "SegmentRepository.GetSegmentByName",
 	}}
 }
 

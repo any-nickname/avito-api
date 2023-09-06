@@ -86,7 +86,7 @@ definitions:
         type: string
       location:
         type: string
-      originErrorText:
+      origin_error_text:
         type: string
       title:
         type: string
@@ -97,7 +97,7 @@ definitions:
         type: string
       location:
         type: string
-      originErrorText:
+      origin_error_text:
         type: string
       title:
         type: string
@@ -108,7 +108,7 @@ definitions:
         type: string
       location:
         type: string
-      originErrorText:
+      origin_error_text:
         type: string
       title:
         type: string
@@ -119,7 +119,7 @@ definitions:
         type: string
       location:
         type: string
-      originErrorText:
+      origin_error_text:
         type: string
       title:
         type: string
@@ -130,7 +130,7 @@ definitions:
         type: string
       location:
         type: string
-      originErrorText:
+      origin_error_text:
         type: string
       title:
         type: string
@@ -141,7 +141,7 @@ definitions:
         type: string
       location:
         type: string
-      originErrorText:
+      origin_error_text:
         type: string
       title:
         type: string
@@ -165,7 +165,7 @@ definitions:
   avito-rest-api_internal_service.UserCreateInput:
     properties:
       age:
-        example: 26
+        example: 27
         type: integer
       lastname:
         example: Иванов
@@ -330,9 +330,6 @@ paths:
         наименование сегмента, дату добавления пользователя в сегмент и
         дату выхода пользователя из сегмента соответственно. Строки отчёта
         отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
-
-        В результате выполнения запроса формируется файл и устанавливается заголовок ответа
-        `Content-Disposition`, поэтому результат выполнения запроса необходимо скачать.
       responses:
         "200":
           description: Структура, содержащая дату формирования отчёта и отчёт в виде
@@ -353,6 +350,17 @@ paths:
   /api/v1/segments:
     get:
       description: Возвращает список всех сегментов
+      parameters:
+      - description: Параметр, определяющий, сегменты какого типа (живые и(или) удалённые)
+          необходимо вернуть. Значение `both` предполагает, что будут возвращены сегменты
+          обоих типов (то есть абсолютно все сегменты, когда-либо созданные в системе).
+          Значение `alive` предполагает, что будут возвращены только живые (то есть
+          не помеченные как удалённые) сегменты. Значение `deleted` предполагает,
+          что будут возвращены только сегменты, помеченные как удалённые. Отсутствие
+          параметра равносильно параметру со значением `both`.
+        in: query
+        name: segment_type
+        type: string
       produces:
       - application/json
       responses:

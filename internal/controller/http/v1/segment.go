@@ -147,6 +147,14 @@ type GetSegmentByNameResponse struct {
 func (r *segmentRoutes) getByName(c echo.Context) error {
 	name := c.Param("name")
 
+	// Валидация
+	if name == "" {
+		return errorHandler(c, customError.ErrSegmentValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid query param \"name\" was provided. \"name\" cannot be empty",
+			Location: "SegmentRoutes.getByName - validation",
+		}})
+	}
+
 	segment, err := r.segmentService.GetSegmentByName(c.Request().Context(), name)
 	if err != nil {
 		return errorHandler(c, err)

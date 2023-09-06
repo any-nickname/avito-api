@@ -78,7 +78,7 @@ func (s *SegmentService) CreateSegment(ctx context.Context, input SegmentCreateI
 		} else {
 			return "", customError.ErrSegmentAlreadyExists{ErrBase: customError.ErrBase{
 				Comment:  fmt.Sprintf("Segment with the given name \"%s\" already exists", input.Name),
-				Location: "SegmentService.CreateSegment",
+				Location: "SegmentService.CreateSegment - doesSegmentExist",
 			}}
 		}
 	}
@@ -110,15 +110,30 @@ func (s *SegmentService) GetAllSegments(ctx context.Context, sType int) ([]entit
 func (s *SegmentService) GetSegmentByName(ctx context.Context, name string) (entity.Segment, error) {
 	exist, err := s.doesSegmentExist(ctx, name)
 	if err != nil {
-		return entity.Segment{}, customError.ErrInternalServerError{}
+		return entity.Segment{}, err
 	}
 	if !exist {
-		return entity.Segment{}, customError.ErrSegmentNotFound{}
+		return entity.Segment{}, customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
+			Comment:  fmt.Sprintf("Segment with provided name \"%s\" does not exist", name),
+			Location: "SegmentService.GetSegmentByName - doesSegmentExist",
+		}}
+	}
+	isDeleted, err := s.isSegmentDeleted(ctx, name)
+	if err != nil {
+		return entity.Segment{}, err
+	}
+	if isDeleted {
+		return entity.Segment{}, customError.ErrSegmentDeleted{ErrBase: customError.ErrBase{
+			Comment: fmt.Sprintf("Segment with provided name \"%s\" was deleted. "+
+				"If you want work with this segment, recover it by performing create "+
+				"operation with this segment name", name),
+			Location: "SegmentService.GetSegmentByName - isSegmentDeleted",
+		}}
 	}
 
 	segment, err := s.segmentRepository.GetSegmentByName(ctx, name)
 	if err != nil {
-		return entity.Segment{}, customError.ErrInternalServerError{}
+		return entity.Segment{}, err
 	}
 
 	return segment, nil

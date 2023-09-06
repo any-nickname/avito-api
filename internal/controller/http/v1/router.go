@@ -31,7 +31,7 @@ func errorHandler(c echo.Context, err error) error {
 		return c.JSON(http.StatusNotFound, t)
 	case customError.ErrUserDeleted:
 		t.Title = "ErrUserDeleted"
-		return c.JSON(http.StatusNotFound, t)
+		return c.JSON(http.StatusBadRequest, t)
 
 	// Ошибки сегмента
 	case customError.ErrSegmentValidationError:
@@ -42,7 +42,7 @@ func errorHandler(c echo.Context, err error) error {
 		return c.JSON(http.StatusNotFound, t)
 	case customError.ErrSegmentDeleted:
 		t.Title = "ErrSegmentDeleted"
-		return c.JSON(http.StatusNotFound, t)
+		return c.JSON(http.StatusBadRequest, t)
 	case customError.ErrSegmentAlreadyExists:
 		t.Title = "ErrSegmentAlreadyExists"
 		return c.JSON(http.StatusBadRequest, t)
