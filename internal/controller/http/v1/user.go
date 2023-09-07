@@ -176,8 +176,8 @@ func (r *userRoutes) getByID(c echo.Context) error {
 		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
 			OriginError:     err,
 			OriginErrorText: err.Error(),
-			Comment:         "Invalid \"id\" param value. \"id\" should be integer",
-			Location:        "UserRoutes.getByID - strconv.Atoi - c.Param",
+			Comment:         "Invalid \"id\" path-param value. \"id\" should be integer",
+			Location:        "UserRoutes.getByID - strconv.Atoi",
 		}})
 	}
 
@@ -209,8 +209,8 @@ func (r *userRoutes) getByIDWithSegments(c echo.Context) error {
 		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
 			OriginError:     err,
 			OriginErrorText: err.Error(),
-			Comment:         "Invalid \"id\" param value. \"id\" should be integer",
-			Location:        "UserRoutes.getByID - strconv.Atoi - c.Param",
+			Comment:         "Invalid \"id\" path-param value. \"id\" should be integer",
+			Location:        "UserRoutes.getByID - strconv.Atoi",
 		}})
 	}
 

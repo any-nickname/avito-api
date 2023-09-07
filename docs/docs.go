@@ -763,6 +763,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "age": {
+                    "description": "Целое положительное число",
                     "type": "integer",
                     "example": 27
                 },

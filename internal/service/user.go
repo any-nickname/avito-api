@@ -108,11 +108,9 @@ func (us *UserService) GetUserByID(ctx context.Context, id int) (entity.User, er
 		return entity.User{}, err
 	}
 	if user.IsDeleted {
-		return user, customError.ErrUserDeleted{ErrBase: customError.ErrBase{
-			OriginError:     nil,
-			OriginErrorText: "",
-			Comment:         fmt.Sprintf("User with id %d is deleted", id),
-			Location:        "UserService.GetUserByID - us.userRepository.GetUserByID",
+		return entity.User{}, customError.ErrUserDeleted{ErrBase: customError.ErrBase{
+			Comment:  fmt.Sprintf("User with id %d is deleted", id),
+			Location: "UserService.GetUserByID - us.userRepository.GetUserByID",
 		}}
 	}
 	return user, nil
@@ -128,6 +126,12 @@ func (us *UserService) GetUserWithSegmentsByUserID(ctx context.Context, id int) 
 	user, err := us.userRepository.GetUserByID(ctx, id)
 	if err != nil {
 		return entity.UserWithSegments{}, err
+	}
+	if user.IsDeleted {
+		return entity.UserWithSegments{}, customError.ErrUserDeleted{ErrBase: customError.ErrBase{
+			Comment:  fmt.Sprintf("User with id %d is deleted", id),
+			Location: "UserService.GetUserWithSegmentsByUserID - us.userRepository.GetUserByID",
+		}}
 	}
 	segments, err := us.userRepository.GetUserSegmentsByUserID(ctx, id)
 	if err != nil {
@@ -155,7 +159,7 @@ func (us *UserService) AddUserToSegments(ctx context.Context, id int, segments [
 		}
 	}
 
-	// Проверка существования пользователя
+	// Проверка существования пользователя и на то, что он удалён
 	_, err := us.GetUserByID(ctx, id)
 	if err != nil {
 		if _, ok := err.(customError.ErrUserNotFound); ok {
@@ -184,10 +188,8 @@ func (us *UserService) AddUserToSegments(ctx context.Context, id int, segments [
 		if err != nil {
 			if _, ok := err.(customError.ErrSegmentNotFound); ok {
 				return customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
-					OriginError:     nil,
-					OriginErrorText: "",
-					Comment: fmt.Sprintf(`Operation was canceled. Failed to add user (id=%d) to the
-								 				segment \"%s\" because segment does not exist`, id, tSegment.Name),
+					Comment: fmt.Sprintf("Operation was canceled. Failed to add user (id=%d) to the"+
+						"segment \"%s\" because segment does not exist", id, tSegment.Name),
 					Location: "UserService.AddUserToSegments - us.segmentRepository.GetSegmentByName",
 				}}
 			}
@@ -195,8 +197,6 @@ func (us *UserService) AddUserToSegments(ctx context.Context, id int, segments [
 		}
 		if tSegment.IsDeleted {
 			return customError.ErrSegmentDeleted{ErrBase: customError.ErrBase{
-				OriginError:     nil,
-				OriginErrorText: "",
 				Comment: fmt.Sprintf("Operation was canceled. Failed to add user (id=%d) to the "+
 					"segment \"%s\" because segment does not exist "+
 					"(segment was deleted earlier and was not created again)", id, tSegment.Name),

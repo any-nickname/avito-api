@@ -165,6 +165,7 @@ definitions:
   avito-rest-api_internal_service.UserCreateInput:
     properties:
       age:
+        description: Целое положительное число
         example: 27
         type: integer
       lastname:
