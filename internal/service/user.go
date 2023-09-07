@@ -159,7 +159,7 @@ func (us *UserService) AddUserToSegments(ctx context.Context, id int, segments [
 		}
 	}
 
-	// Проверка существования пользователя и на то, что он удалён
+	// Проверка существования пользователя и проверка на то, что он удалён
 	_, err := us.GetUserByID(ctx, id)
 	if err != nil {
 		if _, ok := err.(customError.ErrUserNotFound); ok {
