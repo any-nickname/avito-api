@@ -112,12 +112,12 @@ func (r *segmentRoutes) getAll(c echo.Context) error {
 
 	var sTypeInt int
 	switch sType {
-	case "both":
-		sTypeInt = 2
 	case "alive":
 		sTypeInt = 0
 	case "deleted":
 		sTypeInt = 1
+	case "both":
+		sTypeInt = 2
 	}
 
 	segments, err := r.segmentService.GetAllSegments(c.Request().Context(), sTypeInt)

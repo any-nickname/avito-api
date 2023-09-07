@@ -25,7 +25,7 @@ type UserCreateInput struct {
 	Name     string `json:"name" example:"Михаил" validate:"required"`
 	Lastname string `json:"lastname" example:"Иванов" validate:"required"`
 	Sex      int    `json:"sex" example:"0" enums:"0,1" validate:"required"` // Пол, 0 - мужской, 1 - женский
-	Age      int    `json:"age" example:"27" validate:"required"`
+	Age      int    `json:"age" example:"27" validate:"required"`            // Целое положительное число
 }
 
 func (us *UserService) CreateUser(ctx context.Context, input UserCreateInput) (int, error) {

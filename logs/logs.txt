@@ -1267,3 +1267,426 @@
 {"level":"info","msg":"Configuring graceful shutdown...","time":"2023-08-31 21:30:16"}
 {"level":"info","msg":"app - Run - signal: interrupt","time":"2023-08-31 21:31:54"}
 {"level":"info","msg":"Shutting down...","time":"2023-08-31 21:31:54"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 16:50:40"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 16:50:40"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 16:50:40"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 16:50:40"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 16:50:40"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 16:50:40"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 16:50:40"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 16:51:30"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 16:51:30"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 16:51:38"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 16:51:38"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 16:51:38"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 16:51:38"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 16:51:38"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 16:51:38"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 16:51:38"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 16:51:51"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 16:51:51"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 16:52:39"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 16:52:39"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 16:52:39"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 16:52:39"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 16:52:39"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 16:52:39"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 16:52:39"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 16:53:07"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 16:53:07"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 16:53:10"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 16:53:10"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 16:53:10"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 16:53:10"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 16:53:10"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 16:53:10"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 16:53:10"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 16:56:06"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 16:56:06"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 17:11:26"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 17:11:26"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 17:11:26"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 17:11:26"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 17:11:26"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 17:11:26"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 17:11:26"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 17:12:36"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 17:12:36"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 17:14:40"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 17:14:40"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 17:14:40"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 17:14:40"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 17:14:40"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 17:14:40"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 17:14:40"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 17:15:21"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 17:15:21"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:33:44"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:33:44"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:33:44"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:33:44"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:33:44"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 13:33:44"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:33:44"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:37:44"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:37:44"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:37:53"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:37:53"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:37:53"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:37:53"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:37:53"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8181","time":"2023-09-02 13:37:53"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:37:53"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:38:29"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:38:29"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:39:09"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:39:09"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:39:09"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:39:09"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:39:09"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8181","time":"2023-09-02 13:39:09"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:39:09"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:39:35"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:39:35"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:39:43"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:39:43"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:39:43"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:39:43"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:39:43"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8181","time":"2023-09-02 13:39:43"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:39:43"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:41:56"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:41:56"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:42:07"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:42:07"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:42:07"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:42:07"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:42:07"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 13:42:07"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:42:07"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:44:44"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:44:44"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:44:56"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:44:56"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:44:56"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:44:56"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:44:56"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 13:44:56"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:44:56"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:47:00"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:47:00"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:47:13"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:47:13"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:47:13"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:47:13"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:47:13"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 13:47:13"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:47:13"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 13:48:58"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 13:48:58"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 13:51:32"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 13:51:32"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 13:51:32"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 13:51:32"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 13:51:32"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 13:51:32"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 13:51:32"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:02:41"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:02:41"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:02:48"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:02:48"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:02:48"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:02:48"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:02:48"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 14:02:48"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:02:48"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:10:24"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:10:24"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:16:00"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:16:00"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:16:00"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:16:00"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:16:00"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 14:16:00"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:16:00"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:18:41"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:18:41"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:18:46"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:18:46"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:18:46"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:18:46"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:18:46"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 14:18:46"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:18:46"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:20:36"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:20:36"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:20:47"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:20:47"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:20:47"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:20:47"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:20:47"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8181","time":"2023-09-02 14:20:47"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:20:47"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:20:55"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:20:55"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:20:59"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:20:59"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:20:59"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:20:59"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:20:59"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8181","time":"2023-09-02 14:20:59"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:20:59"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:25:13"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:25:13"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:25:18"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:25:18"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:25:18"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:25:18"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:25:18"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 14:25:18"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:25:18"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:25:27"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:25:27"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:53:58"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:53:58"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:53:58"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:53:58"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:53:58"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 14:53:58"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:53:58"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:54:36"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:54:36"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 14:55:08"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 14:55:09"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 14:55:09"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 14:55:09"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 14:55:09"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 14:55:09"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 14:55:09"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 14:55:38"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 14:55:38"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 17:53:02"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 17:53:02"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 17:53:02"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 17:53:02"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 17:53:02"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 17:53:02"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 17:53:02"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 17:55:09"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 17:55:09"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 17:55:14"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 17:55:14"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 17:55:14"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 17:55:14"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 17:55:14"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 17:55:14"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 17:55:14"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 17:55:25"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 17:55:25"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 17:55:34"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 17:55:34"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 17:55:34"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 17:55:34"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 17:55:34"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 17:55:34"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 17:55:34"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 17:58:39"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 17:58:39"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:31:57"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:31:57"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:31:57"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:31:57"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:31:57"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:31:57"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:31:57"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:34:59"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:34:59"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 22:35:22"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 22:35:22"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 22:35:22"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 22:35:22"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 22:35:22"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 22:35:22"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 22:35:22"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 22:35:48"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 22:35:48"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 22:36:46"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 22:36:46"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 22:36:46"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 22:36:46"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 22:36:46"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 22:36:46"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 22:36:46"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 22:36:59"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 22:36:59"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 22:37:12"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 22:37:12"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 22:37:12"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 22:37:12"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 22:37:12"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 22:37:12"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 22:37:12"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 22:37:20"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 22:37:20"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 22:37:28"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 22:37:28"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 22:37:28"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 22:37:28"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 22:37:28"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 22:37:28"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 22:37:28"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 22:37:34"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 22:37:34"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:37:41"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:37:41"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:37:41"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:37:41"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:37:41"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:37:41"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:37:41"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:40:02"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:40:02"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:41:32"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:41:32"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:41:32"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:41:32"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:41:32"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:41:32"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:41:32"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:43:59"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:43:59"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:44:08"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:44:08"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:44:08"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:44:08"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:44:08"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:44:08"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:44:08"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:46:16"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:46:16"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:46:24"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:46:24"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:46:24"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:46:24"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:46:24"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:46:24"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:46:24"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:47:54"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:47:54"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:48:03"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:48:03"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:48:03"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:48:03"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:48:03"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:48:03"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:48:03"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:49:12"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:49:12"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:54:51"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:54:51"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:54:51"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:54:51"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:54:51"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:54:51"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:54:51"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:55:28"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:55:28"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 18:56:48"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 18:56:48"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 18:56:48"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 18:56:48"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 18:56:48"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 18:56:48"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 18:56:48"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 18:58:54"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 18:58:54"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:03:51"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:03:51"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:03:51"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:03:51"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:03:51"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:03:51"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:03:51"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:04:21"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:04:21"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:05:13"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:05:13"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:05:13"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:05:13"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:05:13"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:05:13"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:05:13"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:05:59"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:05:59"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:18:06"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:18:06"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:18:06"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:18:06"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:18:06"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:18:06"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:18:06"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:21:52"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:21:52"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:30:13"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:30:13"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:30:13"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:30:13"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:30:13"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:30:13"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:30:13"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:31:20"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:31:20"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:33:09"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:33:09"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:33:09"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:33:09"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:33:09"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:33:09"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:33:09"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:34:09"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:34:09"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:35:29"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:35:29"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:35:29"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:35:29"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:35:29"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:35:29"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:35:29"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:38:20"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:38:20"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:38:32"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:38:32"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:38:32"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:38:32"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:38:32"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:38:32"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:38:32"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:39:13"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:39:13"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 23:42:16"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 23:42:16"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 23:42:16"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 23:42:16"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 23:42:16"}
+{"level":"debug","msg":"Startint HTTP server by localhost:8080","time":"2023-09-02 23:42:16"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 23:42:16"}
+{"level":"info","msg":"app - Run - signal: interrupt","time":"2023-09-02 23:44:07"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 23:44:07"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:44:54"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:44:54"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:44:54"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:44:54"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:44:54"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:44:54"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:44:54"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:48:45"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:48:45"}
+{"level":"info","msg":"Initializing database...","time":"2023-09-02 19:50:23"}
+{"level":"info","msg":"Initializing repositories...","time":"2023-09-02 19:50:23"}
+{"level":"info","msg":"Initializing services...","time":"2023-09-02 19:50:23"}
+{"level":"info","msg":"Initializing echo...","time":"2023-09-02 19:50:23"}
+{"level":"info","msg":"Starting HTTP server...","time":"2023-09-02 19:50:23"}
+{"level":"debug","msg":"Startint HTTP server by 0.0.0.0:8080","time":"2023-09-02 19:50:23"}
+{"level":"info","msg":"Configuring graceful shutdown...","time":"2023-09-02 19:50:23"}
+{"level":"info","msg":"app - Run - signal: terminated","time":"2023-09-02 19:52:59"}
+{"level":"info","msg":"Shutting down...","time":"2023-09-02 19:52:59"}

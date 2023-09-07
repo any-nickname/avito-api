@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../avito-api/.idea/avito-api.iml" filepath="$PROJECT_DIR$/../avito-api/.idea/avito-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/avito-api.iml" filepath="$PROJECT_DIR$/.idea/avito-api.iml" />
     </modules>
   </component>
 </project>

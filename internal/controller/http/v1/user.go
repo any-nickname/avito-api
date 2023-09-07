@@ -43,7 +43,7 @@ type UserCreateResponse struct {
 // @Failure 500 {object} customError.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/users [post]
 func (r *userRoutes) create(c echo.Context) error {
-	var input service.UserCreateInput
+	input := service.UserCreateInput{Sex: -1, Age: -1}
 
 	if err := c.Bind(&input); err != nil {
 		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
@@ -51,6 +51,52 @@ func (r *userRoutes) create(c echo.Context) error {
 			OriginErrorText: err.Error(),
 			Comment:         "invalid request body",
 			Location:        "UserRoutes.create - c.Bind",
+		}})
+	}
+
+	// Валидация
+	if input.Name == "" {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Field \"name\" cannot be empty",
+			Location: "UserRoutes.create - validation",
+		}})
+	} else if len(input.Name) > 1000 {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Length of the field \"name\" cannot be over 1.000 symbols",
+			Location: "UserRoutes.create - validation",
+		}})
+	}
+	if input.Lastname == "" {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Field \"lastname\" cannot be empty",
+			Location: "UserRoutes.create - validation",
+		}})
+	} else if len(input.Lastname) > 1000 {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Length of the field \"lastname\" cannot be over 1.000 symbols",
+			Location: "UserRoutes.create - validation",
+		}})
+	}
+	if input.Sex == -1 {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Required field \"sex\" was not provided",
+			Location: "UserRoutes.create - validation",
+		}})
+	} else if input.Sex < 0 || input.Sex > 1 {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Field \"sex\" must equals to 0 (man) or 1 (woman)",
+			Location: "UserRoutes.create - validation",
+		}})
+	}
+	if input.Age == -1 {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Required field \"age\" was not provided",
+			Location: "UserRoutes.create - validation",
+		}})
+	} else if input.Age <= 0 {
+		return errorHandler(c, customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+			Comment:  "Invalid request body. Field \"age\" must be positive integer number",
+			Location: "UserRoutes.create - validation",
 		}})
 	}
 
