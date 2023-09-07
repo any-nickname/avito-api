@@ -274,7 +274,7 @@ API - эта информация перечисляется в массиве `
 Пример ответа:
 ```json
 {
-  "message": "user 179 was successfully removed from segments"
+  "message": "user 16 was successfully removed from segments"
 }
 ```
 
