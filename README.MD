@@ -1,3 +1,7 @@
+![gopher image](https://raw.githubusercontent.com/tottie000/GopherIllustrations/main/Gopher_Illustrations/channel.png)
+
+_<font size="2">The Go gopher was designed by Renée French. Illustrations by tottie.</font>_
+
 # Сервис по работе с сегментами
 
 Проект представляет собой микросервис, предоставляющий функционал по работе с сегментами пользователей.
