@@ -154,7 +154,7 @@ func (r *SegmentRepository) GetSegmentByName(ctx context.Context, name string) (
 		return segment, nil
 	}
 
-	return entity.Segment{}, customError.ErrUserNotFound{ErrBase: customError.ErrBase{
+	return entity.Segment{}, customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
 		Comment:  fmt.Sprintf("Segment with name %s does not exist", name),
 		Location: "SegmentRepository.GetSegmentByName",
 	}}
