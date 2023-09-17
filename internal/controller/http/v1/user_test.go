@@ -700,6 +700,39 @@ func TestUserRoutes_addUserToSegments(t *testing.T) {
 				"AVITO_BAKERY",
 			) + "\n",
 		},
+		{
+			name: "Appearance of two identical segments",
+			args: args{
+				ctx: context.Background(),
+				input: argsInput{
+					UserID: 1,
+					Segments: []entity.UserSegmentInformation{
+						{
+							Name: "AVITO_MUSIC",
+						},
+						{
+							Name: "AVITO_MUSIC",
+						},
+					},
+				},
+			},
+			inputBody: `{"id":1,"segments":[{"name":"AVITO_MUSIC"},{"name":"AVITO_MUSIC"}]}`,
+			mockBehaviour: func(m *mock_service.MockUser, args args) {
+				m.EXPECT().AddUserToSegments(args.ctx, args.input.UserID, args.input.Segments).Return(
+					customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+						Comment: fmt.Sprintf(
+							"Operation was canceled. The segment \"%s\" occurs more than 1 time in the list",
+							args.input.Segments[1].Name,
+						),
+						Location: "UserService.AddUserToSegments - validation",
+					}})
+			},
+			expectedStatusCode: 400,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrUserValidationError","comment":"Operation was canceled. The segment \"%s\" occurs more than 1 time in the list","location":"UserService.AddUserToSegments - validation"}`,
+				"AVITO_MUSIC",
+			) + "\n",
+		},
 	}
 
 	for _, tc := range testCases {
@@ -868,6 +901,32 @@ func TestUserRoutes_deleteUserFromSegments(t *testing.T) {
 				`{"origin_error_text":"","title":"ErrSegmentDeleted","comment":"Operation was canceled. Failed to add user (id=%d) to the segment \"%s\" because segment does not exist (segment was deleted earlier and was not created again)","location":"UserService.DeleteUserFromSegments - isDeleted"}`,
 				1,
 				"AVITO_BAKERY",
+			) + "\n",
+		},
+		{
+			name: "Appearance of two identical segments",
+			args: args{
+				ctx: context.Background(),
+				input: argsInput{
+					UserID:   1,
+					Segments: []string{"AVITO_MUSIC", "AVITO_MUSIC"},
+				},
+			},
+			inputBody: `{"id":1,"segments":[{"name":"AVITO_MUSIC"},{"name":"AVITO_MUSIC"}]}`,
+			mockBehaviour: func(m *mock_service.MockUser, args args) {
+				m.EXPECT().DeleteUserFromSegments(args.ctx, args.input.UserID, args.input.Segments).Return(
+					customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+						Comment: fmt.Sprintf(
+							"Operation was canceled. The segment \"%s\" occurs more than 1 time in the list",
+							args.input.Segments[1],
+						),
+						Location: "UserService.DeleteUserFromSegments - validation",
+					}})
+			},
+			expectedStatusCode: 400,
+			expectedResponseBody: fmt.Sprintf(
+				`{"origin_error_text":"","title":"ErrUserValidationError","comment":"Operation was canceled. The segment \"%s\" occurs more than 1 time in the list","location":"UserService.DeleteUserFromSegments - validation"}`,
+				"AVITO_MUSIC",
 			) + "\n",
 		},
 	}

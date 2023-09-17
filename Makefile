@@ -1,10 +1,12 @@
 up:
 	docker-compose -f docker-compose.yaml up
 
-rm:
-	docker-compose stop \
-	&& docker-compose rm db \
-	&& docker-compose rm app \
+stop:
+	docker-compose stop
+
+down:
+	docker-compose down -v \
+	&& docker rmi avito-api-app \
 	&& rmdir pg-data /s /q
 
 test:

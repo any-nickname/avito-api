@@ -159,6 +159,25 @@ func (us *UserService) AddUserToSegments(ctx context.Context, id int, segments [
 		}
 	}
 
+	// Валидируем, что в запросе нет повторяющихся сегментов, за О(N) с использованием map
+	{
+		segmentsInRequest := make(map[string]int)
+		for _, s := range segments {
+			/*if _, ok := segmentsInRequest[s.Name]; !ok {
+				segmentsInRequest
+			}*/
+			segmentsInRequest[s.Name]++
+		}
+		for _, s := range segments {
+			if segmentsInRequest[s.Name] > 1 {
+				return customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Operation was canceled. The segment \"%s\" occurs more than 1 time in the list", s.Name),
+					Location: "UserService.AddUserToSegments - validation",
+				}}
+			}
+		}
+	}
+
 	// Проверка существования пользователя и проверка на то, что он удалён
 	_, err := us.GetUserByID(ctx, id)
 	if err != nil {
@@ -188,8 +207,7 @@ func (us *UserService) AddUserToSegments(ctx context.Context, id int, segments [
 		if err != nil {
 			if _, ok := err.(customError.ErrSegmentNotFound); ok {
 				return customError.ErrSegmentNotFound{ErrBase: customError.ErrBase{
-					Comment: fmt.Sprintf("Operation was canceled. Failed to add user (id=%d) to the"+
-						"segment \"%s\" because segment does not exist", id, tSegment.Name),
+					Comment:  fmt.Sprintf("Operation was canceled. Failed to add user (id=%d) to the segment \"%s\" because segment does not exist", id, segment.Name),
 					Location: "UserService.AddUserToSegments - us.segmentRepository.GetSegmentByName",
 				}}
 			}
@@ -260,6 +278,25 @@ func (us *UserService) DeleteUserFromSegments(ctx context.Context, id int, segme
 		return err
 	}
 
+	// Валидируем, что в запросе нет повторяющихся сегментов, за О(N) с использованием map
+	{
+		segmentsInRequest := make(map[string]int)
+		for _, s := range segments {
+			/*if _, ok := segmentsInRequest[s.Name]; !ok {
+				segmentsInRequest
+			}*/
+			segmentsInRequest[s]++
+		}
+		for _, s := range segments {
+			if segmentsInRequest[s] > 1 {
+				return customError.ErrUserValidationError{ErrBase: customError.ErrBase{
+					Comment:  fmt.Sprintf("Operation was canceled. The segment \"%s\" occurs more than 1 time in the list", s),
+					Location: "UserService.DeleteUserFromSegments - validation",
+				}}
+			}
+		}
+	}
+
 	// Проверим существование переданных сегментов
 	for _, name := range segments {
 		segment, err := us.segmentRepository.GetSegmentByName(ctx, name)
@@ -307,8 +344,7 @@ func (us *UserService) DeleteUserFromSegments(ctx context.Context, id int, segme
 			OriginError:     nil,
 			OriginErrorText: "",
 			Comment: fmt.Sprintf(
-				"Operation was canceled. User (id = %d) does not belong to some "+
-					"segments: [%s] which were given in the request body",
+				"Operation was canceled. User (id = %d) does not belong to some segments [%s] which were given in the request body",
 				id,
 				strings.Join(exclusion, ", "),
 			),
