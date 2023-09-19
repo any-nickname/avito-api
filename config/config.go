@@ -13,7 +13,7 @@ type Config struct {
 	} `yaml:"app"`
 	Log struct {
 		Level    string `yaml:"level" env:"LOG_LEVEL"`
-		LogsPath string `yaml:"logs_path" env:"LOG_PATH"`
+		LogsPath string `yaml:"logs_path" env:"LOGS_PATH"`
 	}
 	HTTP struct {
 		BindIP string `yaml:"bind_ip" env:"HTTP_BIND_IP"`
