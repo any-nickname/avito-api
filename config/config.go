@@ -12,7 +12,7 @@ type Config struct {
 		Version string `yaml:"version" env:"APP_VERSION"`
 	} `yaml:"app"`
 	Log struct {
-		Level    string `yaml:"level" env:"LOG_LEVE"`
+		Level    string `yaml:"level" env:"LOG_LEVEL"`
 		LogsPath string `yaml:"logs_path" env:"LOG_PATH"`
 	}
 	HTTP struct {
@@ -27,6 +27,9 @@ type Config struct {
 		Database    string `yaml:"database" env:"POSTGRES_DATABASE"`
 		MaxPoolSize int    `yaml:"max_pool_size" env:"POSTGRES_MAX_POOL_SIZE"`
 	} `yaml:"postgresql"`
+	WebAPI struct {
+		GDriveJSONFilePath string `yaml:"google_drive_json_file_path" env:"GOOGLE_DRIVE_JSON_FILE_PATH"`
+	} `yaml:"webapi"`
 }
 
 func NewConfig(configPath string) (*Config, error) {

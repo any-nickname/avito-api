@@ -5,6 +5,7 @@ import (
 	v1 "avito-rest-api/internal/controller/http/v1"
 	"avito-rest-api/internal/repository"
 	"avito-rest-api/internal/service"
+	"avito-rest-api/internal/webapi/gdrive"
 	"avito-rest-api/package/httpserver"
 	"avito-rest-api/package/postgres"
 	"fmt"
@@ -46,7 +47,10 @@ func Run(configPath string) {
 
 	// Инициализация сервисов
 	log.Info("Initializing services...")
-	dependencies := service.ServicesDependencies{Repositories: repositories}
+	dependencies := service.ServicesDependencies{
+		Repositories: repositories,
+		GDrive:       gdrive.New(cfg.WebAPI.GDriveJSONFilePath),
+	}
 	services := service.NewService(dependencies)
 
 	// Echo-обработчик

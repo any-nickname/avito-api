@@ -28,14 +28,14 @@ type MakeReportResponse struct {
 }
 
 // @Summary Получить отчёт в формате csv
-// @Description Возвращает csv-строку, представляющую собой csv-отчёт,
+// @Description Возвращает отчёт,
 // @Description содержащий столбцы `user_id`, `segment_name`, `start_date`,
 // @Description `end_date`, обозначающие идентификатор пользователя,
 // @Description наименование сегмента, дату добавления пользователя в сегмент и
 // @Description дату выхода пользователя из сегмента соответственно. Строки отчёта
 // @Description отсортированы в порядке возрастания по дате добавления пользователя в сегмент.
 // @Tags reports
-// @Success 200 {object} MakeReportResponse "Структура, содержащая дату формирования отчёта и отчёт в виде csv-строки"
+// @Success 200 {object} MakeReportResponse "Структура, содержащая дату формирования отчёта и ссылку на файл с отчётом или отчёт в виде csv-строки"
 // @Failure 400 {object} error.ErrReportValidationError "Ошибка валидации данных запроса"
 // @Failure 500 {object} error.ErrInternalServerError "Внутренняя ошибка сервера"
 // @Router /api/v1/reports [get]

@@ -3,6 +3,7 @@ package service
 import (
 	"avito-rest-api/internal/entity"
 	"avito-rest-api/internal/repository"
+	"avito-rest-api/internal/webapi"
 	"context"
 )
 
@@ -38,12 +39,13 @@ type Services struct {
 
 type ServicesDependencies struct {
 	Repositories *repository.Repositories
+	GDrive       webapi.GDrive
 }
 
 func NewService(dependencies ServicesDependencies) *Services {
 	return &Services{
 		User:    NewUserService(dependencies.Repositories.User, dependencies.Repositories.Segment),
 		Segment: NewSegmentService(dependencies.Repositories.Segment),
-		Report:  NewReportService(dependencies.Repositories.Report),
+		Report:  NewReportService(dependencies.Repositories.Report, dependencies.GDrive),
 	}
 }
