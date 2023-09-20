@@ -26,26 +26,26 @@ _<font size="2">The Go gopher was designed by Renée French. Illustrations by to
 теле ответного HTTP-сообщения. Поэтому, перед тем, как запустить проект, Вам необходимо определиться, в каком виде 
 Вы хотите получать отчёты.
 
-Если Вам требуется загрузка отчётов на гугл-диск с последующим возвратом ссылки на загруженный файл:
+#### Если Вам требуется загрузка отчётов на гугл-диск с последующим возвратом ссылки на загруженный файл:
 
-> 1. Зарегистрируйте своё приложение в Google Cloud Console: [Документация](https://developers.google.com/workspace/guides/create-project).
-> 2. Создайте сервисную учётную запись и пару ключей для доступа к ней: [Документация](https://developers.google.com/workspace/guides/create-credentials) (раздел _Service account credentials_).
-> 3. Скачайте json-файл, содержащий пару ключей для доступа к вашему сервисному аккаунту (например, `your_credentials.json`),
-> и поместите его в директорию `secrets/your_credentials.json`.
-> 4. Дайте проекту знать, где находится файл с ключами, с помощью переменной `GOOGLE_DRIVE_JSON_FILE_PATH` в `.env`-файле
-> или соответствующей структуры в `config.yaml` файле: 
-> ```yaml
-> webapi:
->   google_drive_json_file_path: secrets/your_credentials.json
-> ```
-> 5. (Опционально) Настройте `config` или `.env`-файл под себя.
-> 6. Запустите проект с помощью `make up`.
+1. Зарегистрируйте своё приложение в Google Cloud Console: [Документация](https://developers.google.com/workspace/guides/create-project).
+2. Создайте сервисную учётную запись и пару ключей для доступа к ней: [Документация](https://developers.google.com/workspace/guides/create-credentials) (раздел _Service account credentials_).
+3. Скачайте json-файл, содержащий пару ключей для доступа к вашему сервисному аккаунту (например, `your_credentials.json`),
+и поместите его в директорию `secrets/your_credentials.json`.
+4. Дайте проекту знать, где находится файл с ключами, с помощью переменной `GOOGLE_DRIVE_JSON_FILE_PATH` в `.env`-файле
+или соответствующей структуры в `config.yaml` файле: 
+```yaml
+webapi:
+  google_drive_json_file_path: secrets/your_credentials.json
+```
+5. (Опционально) Настройте `config` или `.env`-файл под себя.
+6. Запустите проект с помощью `make up`.
 
-Если Вам не требуется загрузка отчётов в облако:
+#### Если Вам не требуется загрузка отчётов в облако:
 
-> 1. В `.env` и `config` не добавляйте поле, отвечающее за путь к файлу с ключом.
-> 2. (Опционально) Настройте `config` или `.env`-файл под себя.
-> 3. Запустите проект с помощью `make up`.
+1. В `.env` и `config` не добавляйте поле, отвечающее за путь к файлу с ключом.
+2. (Опционально) Настройте `config` или `.env`-файл под себя.
+3. Запустите проект с помощью `make up`.
 
 После запуска, для того, чтобы проверить работу бекэнда, Вы можете отправить GET-запрос по адресу
 http://localhost:8080/health
@@ -70,46 +70,21 @@ http://localhost:8080/health
 
 Для конфигурирования проекта Вы можете использовать как `config`, так и `.env`-файл.
 
-Описание `config.yaml`:
-```yaml
-app:
-  name                        # Наименование проекта
-  version                     # Версия проекта
-log:
-  level                       # Уровень логирования, значение из множества [trace, debug, info, warn, error, fatal, panic]
-  logs_path                   # Путь, по которому сохраняются логи. Если указанный .txt-файл не существует, он будет создан
-http:
-  bind_ip                     # IP-адрес, по которому доступен сервер
-  port                        # Порт, по которому доступен сервер
-postgresql:
-  host                        # IP-адрес, по которому доступен сервер с БД
-  port                        # Порт, по которому доступен сервер с БД
-  username                    # Имя пользователя для подключения к БД
-  password                    # Пароль пользователя для подключения к БД
-  database                    # Наименование базы данных для подключения
-  max_pool_size               # Максимальное количество соединений, которые могут быть установлены с БД одновременно
-webapi:
-  google_drive_json_file_path # Путь до файла с парой ключей для доступа к сервисной учётной записи Google Cloud
-                              # Если Вы не используете Google Cloud, удалите это поле
-```
-
-Описание `.env`:
-```text
-APP_NAME                    # Наименование проекта
-APP_VERSION                 # Версия проекта
-LOG_LEVEL                   # Уровень логирования, значение из множества [trace, debug, info, warn, error, fatal, panic]
-LOGS_PATH                   # Путь, по которому сохраняются логи. Если указанный .txt-файл не существует, он будет создан
-HTTP_BIND_IP                # IP-адрес, по которому доступен сервер
-HTTP_PORT                   # Порт, по которому доступен сервер
-POSTGRES_HOST               # IP-адрес, по которому доступен сервер с БД
-POSTGRES_PORT               # Порт, по которому доступен сервер с БД
-POSTGRES_USER               # Имя пользователя для подключения к БД
-POSTGRES_PASSWORD           # Пароль пользователя для подключения к БД
-POSTGRES_DATABASE           # Наименование базы данных для подключения
-POSTGRES_MAX_POOL_SIZE      # Максимальное количество соединений, которые могут быть установлены с БД одновременно
-GOOGLE_DRIVE_JSON_FILE_PATH # Путь до файла с парой ключей для доступа к сервисной учётной записи Google Cloud
-                            # Если Вы не используете Google Cloud, удалите это поле
-```
+| `config.yaml`                       | `.env`                      | Описание                                                                                                                              | Тип данных | Пример                   | Диапазон значений                               |
+|-------------------------------------|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|------------|--------------------------|-------------------------------------------------|
+| app: name                           | APP_NAME                    | Имя проекта                                                                                                                           | String     | segmentation-service     |                                                 |
+| app: version                        | APP_VERSION                 | Версия проекта                                                                                                                        | String     | 1.0.0                    |                                                 |
+| log: level                          | LOG_LEVEL                   | Уровень логирования                                                                                                                   | String     | debug                    | [trace, debug, info, warn, error, fatal, panic] |
+| log: logs_path                      | LOGS_PATH                   | Путь сохранения файла с логами                                                                                                        | String     | logs/logs.txt            |                                                 |
+| http: bind_ip                       | HTTP_BIND_IP                | IP-адрес, по которому доступен сервер                                                                                                 | String     | localhost                |                                                 |
+| http: port                          | HTTP_PORT                   | Порт, по которому доступен сервер                                                                                                     | String     | 8080                     |                                                 |
+| postgresql: host                    | POSTGRES_HOST               | IP-адрес, по которому доступен сервер с БД                                                                                            | String     | localhost                |                                                 |
+| postgresql: port                    | POSTGRES_PORT               | Порт, по которому доступен сервер с БД                                                                                                | String     | 5432                     |                                                 |
+| postgresql: username                | POSTGRES_USER               | Имя пользователя для подключения к БД                                                                                                 | String     | root                     |                                                 |
+| postgresql: password                | POSTGRES_PASSWORD           | Пароль пользователя для подключения к БД                                                                                              | String     | root                     |                                                 | 
+| postgresql: database                | POSTGRES_DATABASE           | Наименование базы данных для подключения                                                                                              | String     | segmentation-service     |                                                 |
+| postgresql: max_pool_size           | POSTGRES_MAX_POOL_SIZE      | Максимальное количество соединений, которые могут быть установлены с БД одновременно                                                  | Integer    | 20                       | \> 0                                            |
+| webapi: google_drive_json_file_path | GOOGLE_DRIVE_JSON_FILE_PATH | Путь до файла с парой ключей для доступа к сервисной учётной записи Google Cloud. Если Google Cloud не используется, удалите это поле | String     | secrets/credentials.json |                                                 |
 
 ### _Приоритет конфигураций_
 Переменные окружения имеют приоритет над значениями из `config`-файла, и, если одна и та же переменная
